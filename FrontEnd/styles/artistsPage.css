@@ -1,0 +1,99 @@
+.artist-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 1rem;
+}
+
+.artist-content-wrapper {
+    margin: 10px;
+    padding: 10px;
+    background-color: #5C8374;
+    border-radius: 10px;
+}
+
+.artist-details-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.artist-left, .artist-right {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.artist-photo {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    align-self: center;
+}
+
+.artist-info {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.artist-info-item {
+    margin-bottom: 10px;
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.artist-biography {
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow-y: auto;
+    height: 92px;
+}
+
+.artist-biography-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.artist-discography {
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow-y: auto;
+    height: 300px;
+}
+
+.artist-discography-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.artist-buttons-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.artist-action-button {
+    background-color: #1B4242;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+.artist-action-button:hover {
+    background-color: #122A2A;
+}

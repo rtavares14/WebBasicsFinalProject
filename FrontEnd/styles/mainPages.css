@@ -1,0 +1,135 @@
+.albums-container {
+    background-color: #1B4242;
+    padding: 30px;
+    border-radius: 1rem;
+}
+
+.search-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 10px; /* Added gap for better spacing */
+}
+
+.search-section select,
+.search-section input {
+    margin-right: 10px;
+    padding: 10px;
+    flex: 1;
+    min-width: 150px;
+    box-sizing: border-box;
+    background-color: #5C8374;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-section select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.search-section span {
+    padding: 10px;
+    flex: 1;
+    text-align: right;
+    min-width: 150px;
+    color: white;
+}
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.album-cell {
+    background-color: #5C8374;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.album-cell img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.album-info-box {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.album-info {
+    display: block;
+    background-color: #2F4F4F;
+    border-radius: 4px;
+    color: white;
+    padding: 5px;
+    margin: 5px 0;
+    text-decoration: none;
+    text-align: center;
+}
+
+.rate-button {
+    background-color: #2F4F4F;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.rate-button:hover,
+.album-info:hover {
+    cursor: pointer;
+    background-color: #1B4242;
+}
+
+#album-rating {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.rating-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 50px;
+    margin-left: auto;
+}
+
+#average-rating {
+    color: white;
+    padding: 5px;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
+
+.rating-box {
+    background-color: #5C8374;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+

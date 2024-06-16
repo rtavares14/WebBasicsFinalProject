@@ -1,0 +1,99 @@
+.album-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 1rem;
+}
+
+.album-content-wrapper {
+    margin: 10px;
+    padding: 10px;
+    background-color: #5C8374;
+    border-radius: 10px;
+}
+
+.album-details-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.album-left, .album-right {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.album-cover {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    align-self: center;
+}
+
+.album-info {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.album-info-item {
+    margin-bottom: 10px;
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.album-description {
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow-y: auto;
+    height: 92px;
+}
+
+.album-description-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.album-track-list {
+    background-color: #1B4242;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow-y: auto;
+    height: 300px;
+}
+
+.album-tracks-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.album-buttons-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.album-action-button {
+    background-color: #1B4242;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+.album-action-button:hover {
+    background-color: #122A2A;
+}

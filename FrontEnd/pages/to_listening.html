@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Manager</title>
+    <link rel="stylesheet" href="../styles/forAll.css">
+    <link rel="stylesheet" href="../styles/mainPages.css">
+    <link rel="stylesheet" href="../styles/popups.css">
+    <script src="../scripts/forAllPages.js" defer></script>
+    <script src="../scripts/toListening.js" defer></script>
+    <script src="../scripts/popupBtn.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <button class="buttons" onclick="redirectToMyAlbums()">My albums</button>
+        <button class="buttons" onclick="redirectToListening()">To listening</button>
+        <button class="buttons" id="addInfoBtn">Add information</button>
+    </div>
+
+    <!-- Container for all albums -->
+    <div class="albums-container">
+        <!-- Search and filter section inside albums container -->
+        <div class="search-section">
+            <div>
+                <select>
+                    <option value="albumName-asc">Order by: Album Name A-Z</option>
+                    <option value="albumName-desc">Order by: Album Name Z-A</option>
+                    <option value="artistName-asc">Order by: Artist Name A-Z</option>
+                    <option value="artistName-desc">Order by: Artist Name Z-A</option>
+                </select>
+                <input type="text" placeholder="Search album or artist name">
+            </div>
+        </div>
+
+        <!-- Container for album cells -->
+        <div id="album-container" class="album-grid">
+
+        </div>
+    </div>
+</div>
+
+<div id="popupsContainer"></div>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Detail</title>
+    <link rel="stylesheet" href="../styles/forAll.css">
+    <link rel="stylesheet" href="../styles/artistsPage.css">
+    <link rel="stylesheet" href="../styles/popups.css">
+    <script src="../scripts/forAllPages.js" defer></script>
+    <script src="../scripts/popupBtn.js" defer></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <button class="buttons" onclick="redirectToMyAlbums()">My albums</button>
+        <button class="buttons" onclick="redirectToListening()">To listening</button>
+        <button class="buttons" id="addInfoBtn">Add information</button>
+    </div>
+
+    <div class="artist-content">
+        <div class="artist-content-wrapper">
+            <div class="artist-details-box">
+                <div class="artist-left">
+                    <img src="https://yt3.googleusercontent.com/V4FqOieQ9y9dnErXPUZNWl1hyLafxIK7F55n5M8LVhPBmEou8kAbNuMlUZx23DoJHvH1sWG56No=s900-c-k-c0x00ffffff-no-rj" alt="To Pimp a Butterfly" class="artist-photo">
+                    <div class="artist-info">
+                        <div class="artist-info-item">Kendrick Lamar</div>
+                        <div class="artist-info-item">Radio in Portugal</div>
+                        <div class="artist-info-item">Artist rate: 10/10</div>
+                        <div class="artist-info-item">Already saw it live: no</div>
+                    </div>
+                </div>
+                <div class="artist-right">
+                    <div class="artist-biography">
+                        <div class="artist-biography-title">Artist description</div>
+                        Artist description. Artist description. Artist description. Artist description. Artist description. Artist description. Artist description. Artist description.
+                    </div>
+                    <div class="artist-discography">
+                        <div class="artist-discography-title">Album collection</div>
+                        <div>Album number 1 -- All the starts are red -- 8 tracks</div>
+                        <div>Album number 2 -- All the starts are red -- 14 tracks</div>
+                        <div>Album number 3 -- All the starts are red -- 22 tracks</div>
+                        <div>Album number 4 -- All the starts are red -- 15 tracks</div>
+                        <div>Album number 5 -- All the starts are red -- 78 tracks</div>
+                        <div>Album number 6 -- All the starts are red -- 25 tracks</div>
+                        <div>Album number 7 -- All the starts are red -- 34 tracks</div>
+                        <div>Album number 8 -- All the starts are red -- 12 tracks</div>
+                    </div>
+                </div>
+            </div>
+            <div class="artist-buttons-box">
+                <button class="artist-action-button">Save Artist</button>
+                <button class="artist-action-button">Delete Artist</button>
+                <button class="artist-action-button">Edit Artist</button>
+                <button class="artist-action-button">Add Album</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popupsContainer"></div>
+
+</body>
+</html>

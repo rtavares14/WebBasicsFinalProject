@@ -1,0 +1,77 @@
+<!-- popups.html -->
+<!-- Initial small popup for choosing action -->
+<script src="../scripts/popupBtn.js" defer></script>
+
+<div id="initialPopup" class="popup">
+    <div class="popup-content">
+        <h2>Choose Action</h2>
+        <div class="form-buttons">
+            <button id="openAddAlbumPopup">Add Album</button>
+            <button id="openOtherPopup">Add Artist</button>
+            <button id="cancelInitialPopup">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Popup for adding new album -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>Add new Album to the vault</h2>
+        <form id="albumForm">
+            <label for="albumName">Album name:</label>
+            <input type="text" id="albumName" name="albumName" required>
+
+            <label for="artistName">Artist name:</label>
+            <input type="text" id="artistName" name="artistName" required>
+
+            <label for="numTracks">Number of tracks:</label>
+            <input type="number" id="numTracks" name="numTracks" min="1" required>
+
+            <label for="genre">Musical genre:</label>
+            <input type="text" id="genre" name="genre" required>
+
+            <label for="description">Album description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="albumImg">Upload Album cover (URL):</label>
+            <textarea id="albumImg" name="albumImg" required></textarea>
+
+            <div class="form-buttons">
+                <button type="submit">Save album</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Popup for adding new artist -->
+<div id="artistPopup" class="popup">
+    <div class="popup-content">
+        <h2>Add new Artist to the vault</h2>
+        <form id="artistForm">
+            <label for="artistName">Name of the artist:</label>
+            <input type="text" id="artistNameArtist" name="artistName" required>
+
+            <label for="firstHeard">Place where I first heard them:</label>
+            <input type="text" id="firstHeard" name="firstHeard" required>
+
+            <label for="artistRate">Artist rate (out of 10):</label>
+            <input type="number" id="artistRate" name="artistRate" min="1" max="10">
+
+            <label for="sawLive">Already saw them live?</label>
+            <input type="text" id="sawLive" name="sawLive">
+
+            <label for="artistDescription">Artist description:</label>
+            <textarea id="artistDescription" name="artistDescription" ></textarea>
+
+            <label for="artistPhoto">Artist photo (URL):</label>
+            <input type="text" id="artistPhoto" name="artistPhoto" required>
+
+            <div class="form-buttons">
+                <button type="submit">Save artist</button>
+                <button type="button" id="cancelArtistBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+

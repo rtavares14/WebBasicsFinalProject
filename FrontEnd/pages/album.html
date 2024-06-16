@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Detail</title>
+    <link rel="stylesheet" href="../styles/forAll.css">
+    <link rel="stylesheet" href="../styles/albumsPage.css">
+    <link rel="stylesheet" href="../styles/popups.css">
+    <script src="../scripts/forAllPages.js" defer></script>
+    <script src="../scripts/popupBtn.js" defer></script>
+    <script src="../scripts/albums.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <button class="buttons" onclick="redirectToMyAlbums()">My albums</button>
+        <button class="buttons" onclick="redirectToListening()">To listening</button>
+        <button class="buttons" id="addInfoBtn">Add information</button>
+    </div>
+
+    <div class="album-content">
+        <div class="album-content-wrapper">
+            <div class="album-details-box">
+                <div class="album-left">
+                    <img src="https://e.snmc.io/i/600/w/8a375efffe9b6bf7f3140b1d3ee16032/8121875/kendrick-lamar-to-pimp-a-butterfly-Cover-Art.jpg" alt="To Pimp a Butterfly" class="album-cover">
+                    <div class="album-info">
+                        <div class="album-info-item">album</div>
+                        <div class="album-info-item">Artist name</div>
+                        <div class="album-info-item">This album is composed by __ tracks and its genre is __</div>
+                        <div class="album-info-item">Album rate: 10/10</div>
+                    </div>
+                </div>
+                <div class="album-right">
+                    <div class="album-description">
+                        <div class="album-description-title">Album description</div>
+                        Album description. Album description. Album description. Album description. Album description. Album description. Album description. Album description.
+                    </div>
+                    <div class="album-track-list">
+                        <div class="album-tracks-title">Album tracks</div>
+                        <div>Track number 1 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 2 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 3 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 4 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 5 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 6 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 7 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 8 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 9 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 10 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 11 -- All the eyes on me -- 2.25m -- 10/10</div>
+                        <div>Track number 12 -- All the eyes on me -- 2.25m -- 10/10</div>
+                    </div>
+                </div>
+            </div>
+            <div class="album-buttons-box">
+                <button class="album-action-button">Save Album</button>
+                <button class="album-action-button">Delete Album</button>
+                <button class="album-action-button">Edit Album</button>
+                <button class="album-action-button">Add track</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popupsContainer"></div>
+
+</body>
+</html>
