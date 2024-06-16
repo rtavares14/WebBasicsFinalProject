@@ -11,36 +11,23 @@
     margin-bottom: 30px;
     flex-wrap: wrap;
     background-color: #1B4242;
-    padding: 10px;
     border-radius: 5px;
     gap: 10px; /* Added gap for better spacing */
 }
 
+.search-section input::placeholder,
 .search-section select,
 .search-section input {
     margin-right: 10px;
     padding: 10px;
     flex: 1;
-    min-width: 150px;
+    min-width: 210px;
     box-sizing: border-box;
     background-color: #5C8374;
     color: white;
     border: none;
     border-radius: 5px;
-}
-
-.search-section select {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
-
-.search-section span {
-    padding: 10px;
-    flex: 1;
-    text-align: right;
-    min-width: 150px;
-    color: white;
+    text-align: left;
 }
 
 .album-grid {
@@ -51,7 +38,7 @@
 
 .album-cell {
     background-color: #5C8374;
-    padding: 20px;
+    padding: 25px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -121,10 +108,12 @@
     padding: 5px;
     font-size: 0.9em;
     border-radius: 5px;
+    text-align: left;
 }
 
 .rating-box {
     background-color: #5C8374;
+    min-width: 200px;
     padding: 5px;
     border-radius: 5px;
     display: flex;
