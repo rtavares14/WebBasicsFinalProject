@@ -6,3 +6,23 @@
 *   4. Link albumId to buttons for further logic (save, delete, add)
 * */
 
+// Function to get the album ID from the URL
+function getAlbumIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('albumId');
+}
+
+// Function to fetch the album data from the backend
+async function fetchAlbumData(albumId) {
+    const response = await fetch(`http://localhost:3000/albums/${albumId}`);
+    if (response.status === 200) {
+        const data = await response.json();
+        return data;
+    } else {
+        return null;
+    }
+}
+
+
+
+window.onload = pageLoad;
