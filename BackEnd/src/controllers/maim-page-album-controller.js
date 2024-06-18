@@ -1,18 +1,36 @@
-import {albumsRated, albumsToListening} from "../data/dummy-date.js";
 import statusCodes from "http-status-codes"
+import Database from "better-sqlite3";
+import * as queries from "../database/databasequerys.js";
+
+export let db;
+
+try {
+    db = new Database('db/data.sqlite');
+
+} catch (e) {
+    console.error("Error while initializing db!", e);
+    throw e;
+}
+
 
 export function getAllAlbums(req, res) {
-    res.json(albumsRated);
+    try {
+        const albums = db.prepare(queries.getAlbumsWithRatingQuery).all();
+        res.json(albums);
+    } catch (error) {
+        console.error("Error retrieving albums:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 }
 
 export function addAblum(req, res) {
-    const { albumName, artistName, numTracks, genre, description, albumImg } = req.body;
-    const album = { albumName, artistName, numTracks, genre, description, albumImg };
+    const { albumName, artistName, numberOfTracks, genre, description, albumCover } = req.body;
+    const album = { albumName, artistName, numberOfTracks, genre, description, albumCover };
 
     console.log(album);
     validateAlbumData(album)
 
-    albumsToListening.push(album);
+    db.prepare(queries.insertAlbumQuery).run();
     res.status(200);
     res.json({mesage:"Album added..."});
 }
