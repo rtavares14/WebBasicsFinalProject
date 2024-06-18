@@ -54,3 +54,29 @@ export const insertTrackQuery = `
 export const getArtistIdByNameQuery = `
     SELECT id FROM artists WHERE artistName = ?;
 `;
+
+export const getAlbumsWithRatingQuery = `
+    SELECT
+        albums.id,
+        albums.albumName,
+        albums.artistName,
+        albums.albumRate,
+        albums.albumCover
+    FROM
+        albums
+    WHERE
+        albums.albumRate IS NOT NULL;
+`;
+
+export const getAlbumsWithoutRatingQuery = `
+    SELECT
+        albums.id,
+        albums.albumName,
+        albums.artistName,
+        albums.albumRate,
+        albums.albumCover
+    FROM
+        albums
+    WHERE
+        albums.albumRate IS NULL;
+`;
