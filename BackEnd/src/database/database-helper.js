@@ -1,11 +1,9 @@
-// Import database from sqlite
 import Database from "better-sqlite3";
-import {albumsRated, albumsToListening, artists} from "../data/dummy-date.js";
+import { albumsRated, albumsToListening, artists } from "../data/dummy-date.js";
 import * as queries from "./databasequerys.js";
 
 // Create a new DB file
 export let db;
-//add dummy data if the tables are empty
 
 try {
     db = new Database('../../db/data.sqlite');
@@ -13,42 +11,59 @@ try {
     db.prepare(queries.createAlbumsTable).run();
     db.prepare(queries.createTracksTable).run();
 
-   // insertDummyData();
+    insertDummyData();
 
 } catch (e) {
     console.error("Error while initializing db!", e);
     throw e;
 }
 
+function getArtistIdByName(artistName) {
+    const stmt = db.prepare(queries.getArtistIdByNameQuery);
+    const result = stmt.get(artistName);
+    return result ? result.id : null; // Return null if artistName doesn't exist
+}
+
 function insertDummyData() {
     const nrOfAlbums = countAlbums();
     console.log("insertDummyData started");
-    console.log(nrOfAlbums);
 
-    //checking if there are already cats inside
     if (nrOfAlbums === 0) {
-        //no data on the BD
-        const insertAlbum = db.prepare(queries.insertAlbum);
-        const insertArtist = db.prepare(queries.insertArtist);
+        const insertAlbum = db.prepare(queries.insertAlbumQuery);
+        const insertArtist = db.prepare(queries.insertArtistQuery);
+
+        let artistAdded = 0;
+        let albumsAdded = 0;
+
+        // Insert artists first
+        for (let artist of artists) {
+            insertArtist.run(artist.artistName, artist.firstPlaceHearIt, artist.artistRate, artist.sawItLive, artist.artistDescription, artist.artistPhoto);
+            artistAdded++;
+        }
 
         // Insert albums from albumsRated
         for (let album of albumsRated) {
-            insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumRate, album.albumImg);
+            const artistId = getArtistIdByName(album.artistName);
+            if (artistId) {
+                insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.albumRate, album.description, album.albumCover, artistId);
+                albumsAdded++;
+            }
         }
 
         // Insert albums from albumsToListening
         for (let album of albumsToListening) {
-            insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumRate, album.albumImg);
+            const artistId = getArtistIdByName(album.artistName);
+            if (artistId) {
+                insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.albumRate, album.description, album.albumCover, artistId);
+                albumsAdded++;
+            }
         }
 
-        // Insert artists from artists
-        for (let artist of artists) {
-            const result = insertArtist.run(artist.artistName, artist.firstPlaceHearIt, artist.artistRate, artist.sawItLive, artist.artistDescription, artist.artistPhoto);
-        }
-
+        console.log("Artists added successfully ("+artistAdded+")");
+        console.log("Albums added successfully ("+albumsAdded+")");
 
     } else {
-        console.log("No new data added!")
+        console.log("No new data added!");
     }
 }
 

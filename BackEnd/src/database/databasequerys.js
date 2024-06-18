@@ -1,42 +1,44 @@
 export const createAlbumsTable = `
-CREATE TABLE IF NOT EXISTS albums (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    albumName TEXT,
-    artistName TEXT,
-    numberOfTracks INTEGER NULL,
-    genre TEXT NULL,
-    albumRate INTEGER NULL,
-    description TEXT NULL,
-    albumCover TEXT,
-    FOREIGN KEY (id) REFERENCES artists(id) ON DELETE CASCADE
-);`
+    CREATE TABLE IF NOT EXISTS albums (
+                                          id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                          albumName TEXT,
+                                          artistName TEXT,
+                                          numberOfTracks INTEGER NULL,
+                                          genre TEXT NULL,
+                                          albumRate INTEGER NULL,
+                                          description TEXT NULL,
+                                          albumCover TEXT,
+                                          artist_id INTEGER,
+                                          FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE
+        );`
 
 export const createArtistTable = `
-CREATE TABLE IF NOT EXISTS artists (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    artistName TEXT,
-    firstPlaceHearIt TEXT NULL,
-    artistRate INTEGER,
-    sawItLive TEXT,
-    artistDescription TEXT NULL,
-    artistPhoto TEXT
-);`
-
-export const createTracksTable = `
-CREATE TABLE IF NOT EXISTS tracks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    trackName TEXT,
-    trackDuration MINUTES,
-    trackRate INTEGER,
-    trackNumber INTEGER,
-    FOREIGN KEY (id) REFERENCES albums(id) ON DELETE CASCADE
+    CREATE TABLE IF NOT EXISTS artists (
+                                           id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                           artistName TEXT,
+                                           firstPlaceHearIt TEXT NULL,
+                                           artistRate INTEGER,
+                                           sawItLive TEXT,
+                                           artistDescription TEXT NULL,
+                                           artistPhoto TEXT
     );`
 
-export const countAlbumsQuery  = `SELECT COUNT(id) AS my_variable FROM albums;`;
+export const createTracksTable = `
+    CREATE TABLE IF NOT EXISTS tracks (
+                                          id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                          trackName TEXT,
+                                          trackDuration TEXT, 
+                                          trackRate INTEGER,
+                                          trackNumber INTEGER,
+                                          album_id INTEGER,
+                                          FOREIGN KEY (album_id) REFERENCES albums(id) ON DELETE CASCADE
+        );`
+
+export const countAlbumsQuery = `SELECT COUNT(id) AS my_variable FROM albums;`;
 
 export const insertAlbumQuery = `
     INSERT INTO albums (albumName, artistName, numberOfTracks, genre, albumRate, description, albumCover, artist_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?,?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 `;
 
 export const insertArtistQuery = `
@@ -49,6 +51,6 @@ export const insertTrackQuery = `
     VALUES (?, ?, ?, ?, ?);
 `;
 
-//do the array
-//inser the arraay onto the table
-
+export const getArtistIdByNameQuery = `
+    SELECT id FROM artists WHERE artistName = ?;
+`;
