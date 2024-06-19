@@ -86,3 +86,20 @@ export const getAlbumsWithoutRatingQuery = `
         albums.albumRate IS NULL;
 `;
 
+export const getAlbumById = `
+    SELECT
+        id,
+        albumName,
+        artistName,
+        numberOfTracks,
+        genre,
+        description,
+        albumRate,
+        albumCover
+    FROM
+        albums
+    WHERE
+        id = ?;
+`;
+
+

@@ -76,6 +76,7 @@ function insertDummyData() {
     }
 }
 
+
 function countAlbums() {
     const result = db.prepare(queries.countAlbumsQuery).get();
     return result ? result.my_variable : 0; // Return my_variable if result exists, otherwise 0
