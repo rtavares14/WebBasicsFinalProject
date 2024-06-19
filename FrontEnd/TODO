@@ -11,7 +11,7 @@ DELETE all tracks when the album is deleted
 EDIT album
 EDIT artist
 
-PUT/get album info
+***PUT/get album info
 PUT/get artist info
 
 ****Search css

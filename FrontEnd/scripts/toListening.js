@@ -23,17 +23,18 @@ async function pageLoad() {
 
 function renderAlbum(album, albumContainer) {
     const albumEl = `
-        <a href="../pages/album.html?albumId=${album.id}" class="album-cell" data-album-id=${album.id}>
+        <a href="../pages/album.html?albumId=${album.id}" class="album-cell" data-album-id=${album.id}">
             <img src="${album.albumCover}" alt="${album.albumName}">
             <div class="album-info-box">
                 <div onclick="redirectToAlbum()" class="album-info">${album.albumName}</div>
                 <div onclick="redirectToArtist()" class="album-info">${album.artistName}</div>
-                <div class="album-info">Rating ${album.albumRate}</div>
+                <div class="album-rating">Rating ${album.albumRate}/10</div>
             </div>
         </a>
     `;
 
     albumContainer.innerHTML += albumEl;
 }
+
 
 pageLoad();

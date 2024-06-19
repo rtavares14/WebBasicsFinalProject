@@ -83,7 +83,7 @@ async function sendAlbumData() {
     console.log("Obj from form ", albumFromForm)
 
     try {
-        const response = await fetch(`http://localhost:3000/albums`, {
+        const response = await fetch(`http://localhost:3000/tolistening`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

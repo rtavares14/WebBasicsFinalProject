@@ -55,6 +55,11 @@ export const getArtistIdByNameQuery = `
     SELECT id FROM artists WHERE artistName = ?;
 `;
 
+export const insertNewAlbumQuery = `
+    INSERT INTO albums (albumName, artistName, numberOfTracks, genre, description, albumCover, artist_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+`;
+
 export const getAlbumsWithRatingQuery = `
     SELECT
         albums.id,
@@ -81,7 +86,3 @@ export const getAlbumsWithoutRatingQuery = `
         albums.albumRate IS NULL;
 `;
 
-export const insertNewAlbumQuery = `
-    INSERT INTO albums (albumName, artistName, numberOfTracks, genre, description, albumCover, artist_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-`;

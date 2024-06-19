@@ -36,22 +36,41 @@ async function pageLoad() {
 }
 
 function renderAlbum(album, albumContainer) {
-    const albumEl = `
-        <a href="../pages/album.html?albumId=${album.id}" class="album-cell" data-album-id=${album.id}>
+    const albumEl = document.createElement('div');
+    albumEl.classList.add('album-cell');
+    albumEl.dataset.albumId = album.id;
+
+    albumEl.innerHTML = `
+        <a href="../pages/album.html?albumId=${album.id}">
             <img src="${album.albumCover}" alt="${album.albumName}">
             <div class="album-info-box">
-                <div onclick="redirectToAlbum()" class="album-info">${album.albumName}</div>
-                <div onclick="redirectToArtist()" class="album-info">${album.artistName}</div>
-                <div class="album-info">Rating ${album.albumRate}/10</div>
+                <div class="album-info album-name" style="cursor: pointer;">${album.albumName}</div>
+                <div class="album-info artist-name" style="cursor: pointer;">${album.artistName}</div>
+                
             </div>
         </a>
+        <div class="album-info album-rating">Rating ${album.albumRate}/10</div>
     `;
-    albumContainer.innerHTML += albumEl;
-    if (album.albumRate !== null) { // Ensure album has a rating
+
+    const albumNameEl = albumEl.querySelector('.album-name');
+    const artistNameEl = albumEl.querySelector('.artist-name');
+
+    albumNameEl.addEventListener('click', (event) => {
+        event.preventDefault();
+        redirectToAlbum(album.id);
+    });
+
+    artistNameEl.addEventListener('click', (event) => {
+        event.preventDefault();
+        redirectToArtist(album.artistName);
+    });
+
+    albumContainer.appendChild(albumEl);
+
+    if (album.albumRate !== null) {
         albumRatings.push(album.albumRate);
     }
 }
-
 function calculateAverageRating(ratings) {
     if (ratings.length === 0) {
         return 0; // Prevent division by zero
@@ -64,5 +83,6 @@ function displayAverageRating() {
     const averageRating = calculateAverageRating(albumRatings);
     averageRatingEl.innerText = `Average Rating: ${averageRating.toFixed(1)}/10`;
 }
+
 
 pageLoad();

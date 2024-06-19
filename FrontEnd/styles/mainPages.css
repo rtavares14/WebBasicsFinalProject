@@ -44,6 +44,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
+    text-align: center; /* Center align text in album cell */
 }
 
 .album-cell img {
@@ -57,20 +58,33 @@
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    text-align: center;
     margin-top: 10px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align items in the box */
 }
 
-.album-info {
-    display: block;
+.album-info,
+.album-rating {
+    width: 100%;
+    max-width: 150px;
     background-color: #2F4F4F;
     border-radius: 4px;
     color: white;
     padding: 5px;
     margin: 5px 0;
-    text-decoration: none;
     text-align: center;
+    box-sizing: border-box;
+}
+
+.album-info:hover {
+    cursor: pointer;
+    background-color: #1B4242;
+}
+
+.album-rating {
+    pointer-events: none;
 }
 
 .rate-button {
@@ -82,8 +96,7 @@
     border-radius: 4px;
 }
 
-.rate-button:hover,
-.album-info:hover {
+.rate-button:hover {
     cursor: pointer;
     background-color: #1B4242;
 }
@@ -120,5 +133,3 @@
     align-items: center;
     justify-content: center;
 }
-
-

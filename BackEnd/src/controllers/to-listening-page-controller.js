@@ -30,11 +30,12 @@ export function addAblum(req, res) {
         // Validate the album data
         validateAlbumData(album);
 
+        // Get artistId based on artistName
+        const artist_id = getArtistIdByName(album.artistName);
+
         // Prepare the insert query
         const insertAlbum = db.prepare(queries.insertNewAlbumQuery);
-
-        // Execute the insert query
-        insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumCover);
+        insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumCover, artist_id);
 
         // Send success response
         res.status(200).json({ message: "Album added successfully." });
@@ -45,6 +46,12 @@ export function addAblum(req, res) {
         // Send error response
         res.status(500).json({ error: "Failed to add album." });
     }
+}
+
+function getArtistIdByName(artistName) {
+    const stmt = db.prepare(queries.getArtistIdByNameQuery);
+    const result = stmt.get(artistName);
+    return result ? result.id : null;
 }
 
 function validateAlbumData(album){
