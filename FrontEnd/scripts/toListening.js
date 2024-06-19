@@ -28,7 +28,7 @@ function renderAlbum(album, albumContainer) {
             <div class="album-info-box">
                 <div onclick="redirectToAlbum()" class="album-info">${album.albumName}</div>
                 <div onclick="redirectToArtist()" class="album-info">${album.artistName}</div>
-                <div class="album-rating">Rating ${album.albumRate}/10</div>
+                <div class="album-rating"> ADD Rating</div>
             </div>
         </a>
     `;

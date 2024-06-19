@@ -1,5 +1,5 @@
 import Database from "better-sqlite3";
-import { albumsRated, albumsToListening, artists } from "../data/dummy-date.js";
+import { albumsRated, albumsToListening, artists,tracks } from "../data/dummy-date.js";
 import * as queries from "./databasequerys.js";
 
 // Create a new DB file
@@ -31,9 +31,11 @@ function insertDummyData() {
     if (nrOfAlbums === 0) {
         const insertAlbum = db.prepare(queries.insertFullyAlbumQuery);
         const insertArtist = db.prepare(queries.insertArtistQuery);
+        const insertTrack = db.prepare(queries.insertTrackQuery);
 
         let artistAdded = 0;
         let albumsAdded = 0;
+        let tracksAdded = 0;
 
         // Insert artists first
         for (let artist of artists) {
@@ -59,8 +61,15 @@ function insertDummyData() {
             }
         }
 
+        // Insert tracks from allTracks
+        for (let track of tracks) {
+            insertTrack.run(track.trackName, track.trackDuration, track.trackRate, track.trackNumber, track.album_id);
+            tracksAdded++;
+        }
+
         console.log("Artists added successfully ("+artistAdded+")");
         console.log("Albums added successfully ("+albumsAdded+")");
+        console.log("Tracks added successfully ("+tracksAdded+")");
 
     } else {
         console.log("No new data added!");

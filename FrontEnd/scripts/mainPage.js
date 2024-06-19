@@ -46,7 +46,6 @@ function renderAlbum(album, albumContainer) {
             <div class="album-info-box">
                 <div class="album-info album-name" style="cursor: pointer;">${album.albumName}</div>
                 <div class="album-info artist-name" style="cursor: pointer;">${album.artistName}</div>
-                
             </div>
         </a>
         <div class="album-info album-rating">Rating ${album.albumRate}/10</div>
@@ -71,6 +70,7 @@ function renderAlbum(album, albumContainer) {
         albumRatings.push(album.albumRate);
     }
 }
+
 function calculateAverageRating(ratings) {
     if (ratings.length === 0) {
         return 0; // Prevent division by zero
@@ -83,6 +83,5 @@ function displayAverageRating() {
     const averageRating = calculateAverageRating(albumRatings);
     averageRatingEl.innerText = `Average Rating: ${averageRating.toFixed(1)}/10`;
 }
-
 
 pageLoad();

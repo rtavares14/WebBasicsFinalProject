@@ -27,8 +27,8 @@ function sortAlbums(criteria) {
         const albumNameB = b.querySelector('.album-info-box > div:nth-child(1)').textContent.trim();
         const artistNameA = a.querySelector('.album-info-box > div:nth-child(2)').textContent.trim();
         const artistNameB = b.querySelector('.album-info-box > div:nth-child(2)').textContent.trim();
-        const ratingA = parseFloat(a.querySelector('.album-info-box > div:nth-child(3)').textContent.split(' ')[1]);
-        const ratingB = parseFloat(b.querySelector('.album-info-box > div:nth-child(3)').textContent.split(' ')[1]);
+        const ratingA = parseFloat(a.querySelector('.album-rating').textContent.split(' ')[1]);
+        const ratingB = parseFloat(b.querySelector('.album-rating').textContent.split(' ')[1]);
 
         if (criteria === 'albumName-asc') {
             return albumNameA.localeCompare(albumNameB);
@@ -60,4 +60,3 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Select element not found');
     }
 });
-
