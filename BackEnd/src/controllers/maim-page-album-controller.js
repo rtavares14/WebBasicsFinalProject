@@ -2,6 +2,7 @@ import statusCodes from "http-status-codes"
 import Database from "better-sqlite3";
 import * as queries from "../database/databasequerys.js";
 
+
 export let db;
 
 try {
@@ -11,7 +12,6 @@ try {
     console.error("Error while initializing db!", e);
     throw e;
 }
-
 
 export function getAllAlbums(req, res) {
     try {
@@ -23,55 +23,54 @@ export function getAllAlbums(req, res) {
     }
 }
 
-export function addAblum(req, res) {
+export function addAlbum(req, res) {
     const { albumName, artistName, numberOfTracks, genre, description, albumCover } = req.body;
     const album = { albumName, artistName, numberOfTracks, genre, description, albumCover };
 
-    console.log(album);
-    validateAlbumData(album)
+    try {
+        // Validate the album data
+        validateAlbumData(album);
 
-    db.prepare(queries.insertAlbumQuery).run();
-    res.status(200);
-    res.json({mesage:"Album added..."});
-}
+        // Get artistId based on artistName
+        const artist_id = getArtistIdByName(album.artistName);
 
-export function getAlbumById(req, res){
-    const id = req.params.id;
-    console.log("I am even called", id)
+        // Prepare the insert query
+        const insertAlbum = db.prepare(queries.insertNewAlbumQuery);
+        insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumCover, artist_id);
 
-    // Replace this with query to db later
-    console.log(albumsToListening)
-    const foundAlbum = albumsToListening.filter(album => parseInt(album.albumId) === parseInt(id))
+        // Send success response
+        res.status(200).json({ message: "Album added successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
 
-    if(foundAlbum.length === 0){
-        throw {
-            status: statusCodes.NOT_FOUND,
-            message: "Album not found"
-        }
+        // Send error response
+        res.status(500).json({ error: "Failed to add album." });
     }
-    res.status(statusCodes.OK)
-    res.json(foundAlbum);
 }
 
+function getArtistIdByName(artistName) {
+    const stmt = db.prepare(queries.getArtistIdByNameQuery);
+    const result = stmt.get(artistName);
+    return result ? result.id : null;
+}
 
-function validateAlbumData(album){
-    if(isStringEmpty(album.albumName) || isStringEmpty(album.artistName) || isStringEmpty(album.albumImg)){
+function validateAlbumData(album) {
+    if (isStringEmpty(album.albumName) || isStringEmpty(album.artistName) || isStringEmpty(album.albumCover)) {
         throw {
             status: statusCodes.BAD_REQUEST,
             message: "Invalid values provided for album"
-        }
+        };
     }
 
-    if(album.numTracks < 1) {
+    if (album.numberOfTracks < 1) {
         throw {
             status: statusCodes.BAD_REQUEST,
-            message: "Num of tracks can't be less than 1"
-        }
+            message: "Number of tracks can't be less than 1"
+        };
     }
 }
 
-function isStringEmpty(str){
-    return str.trim().length === 0
+function isStringEmpty(str) {
+    return !str || str.trim().length === 0;
 }
-
-

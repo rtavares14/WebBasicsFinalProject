@@ -29,7 +29,7 @@ function insertDummyData() {
     console.log("insertDummyData started");
 
     if (nrOfAlbums === 0) {
-        const insertAlbum = db.prepare(queries.insertAlbumQuery);
+        const insertAlbum = db.prepare(queries.insertFullyAlbumQuery);
         const insertArtist = db.prepare(queries.insertArtistQuery);
 
         let artistAdded = 0;

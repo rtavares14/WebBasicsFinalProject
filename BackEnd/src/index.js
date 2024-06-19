@@ -3,7 +3,6 @@ import express from 'express';
 import mainPageRouter from './routers/main-page-router.js';
 import toListeningRouter from './routers/to-listening-router.js';
 import cors from 'cors';
-import {albumsToListening} from "./data/dummy-date.js";
 
 // Initializing express and creating the port variable
 const app = express();

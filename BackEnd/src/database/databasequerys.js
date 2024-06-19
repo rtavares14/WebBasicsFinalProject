@@ -36,7 +36,7 @@ export const createTracksTable = `
 
 export const countAlbumsQuery = `SELECT COUNT(id) AS my_variable FROM albums;`;
 
-export const insertAlbumQuery = `
+export const insertFullyAlbumQuery = `
     INSERT INTO albums (albumName, artistName, numberOfTracks, genre, albumRate, description, albumCover, artist_id)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 `;
@@ -79,4 +79,9 @@ export const getAlbumsWithoutRatingQuery = `
         albums
     WHERE
         albums.albumRate IS NULL;
+`;
+
+export const insertNewAlbumQuery = `
+    INSERT INTO albums (albumName, artistName, numberOfTracks, genre, description, albumCover, artist_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
 `;

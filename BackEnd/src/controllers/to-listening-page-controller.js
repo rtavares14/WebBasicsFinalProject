@@ -26,42 +26,36 @@ export function addAblum(req, res) {
     const { albumName, artistName, numberOfTracks, genre, description, albumCover } = req.body;
     const album = { albumName, artistName, numberOfTracks, genre, description, albumCover };
 
-    console.log(album);
-    validateAlbumData(album)
+    try {
+        // Validate the album data
+        validateAlbumData(album);
 
-    db.prepare(queries.insertAlbumQuery).run();
-    res.status(200);
-    res.json({mesage:"Album added..."});
-}
+        // Prepare the insert query
+        const insertAlbum = db.prepare(queries.insertNewAlbumQuery);
 
-export function getAlbumById(req, res){
-    const id = req.params.id;
-    console.log("I am even called", id)
+        // Execute the insert query
+        insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumCover);
 
-    // Replace this with query to db later
-    console.log(albumsToListening)
-    const foundAlbum = albumsToListening.filter(album => parseInt(album.albumId) === parseInt(id))
+        // Send success response
+        res.status(200).json({ message: "Album added successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
 
-    if(foundAlbum.length === 0){
-        throw {
-            status: statusCodes.NOT_FOUND,
-            message: "Album not found"
-        }
+        // Send error response
+        res.status(500).json({ error: "Failed to add album." });
     }
-    res.status(statusCodes.OK)
-    res.json(foundAlbum);
 }
-
 
 function validateAlbumData(album){
-    if(isStringEmpty(album.albumName) || isStringEmpty(album.artistName) || isStringEmpty(album.albumImg)){
+    if(isStringEmpty(album.albumName) || isStringEmpty(album.artistName) || isStringEmpty(album.albumCover)){
         throw {
             status: statusCodes.BAD_REQUEST,
             message: "Invalid values provided for album"
         }
     }
 
-    if(album.numTracks < 1) {
+    if(album.numberOfTracks < 1) {
         throw {
             status: statusCodes.BAD_REQUEST,
             message: "Num of tracks can't be less than 1"
