@@ -62,28 +62,30 @@ export const insertNewAlbumQuery = `
 
 export const getAlbumsWithRatingQuery = `
     SELECT
-        albums.id,
-        albums.albumName,
-        albums.artistName,
-        albums.albumRate,
-        albums.albumCover
+        id,
+        albumName,
+        artistName,
+        albumRate,
+        albumCover,
+        artist_id
     FROM
         albums
     WHERE
-        albums.albumRate IS NOT NULL;
+        albumRate IS NOT NULL;
 `;
 
 export const getAlbumsWithoutRatingQuery = `
     SELECT
-        albums.id,
-        albums.albumName,
-        albums.artistName,
-        albums.albumRate,
-        albums.albumCover
+        id,
+        albumName,
+        artistName,
+        albumRate,
+        albumCover,
+        artist_id
     FROM
         albums
     WHERE
-        albums.albumRate IS NULL;
+        albumRate IS NULL;
 `;
 
 export const getAlbumById = `
@@ -95,11 +97,26 @@ export const getAlbumById = `
         genre,
         description,
         albumRate,
-        albumCover
+        albumCover,
+        artist_id
     FROM
         albums
     WHERE
         id = ?;
 `;
 
+export const getArtistByIdQuery = `
+    SELECT
+        id,
+        artistName,
+        firstPlaceHearIt,
+        artistRate,
+        sawItLive,
+        artistDescription,
+        artistPhoto
+    FROM
+        artists
+    WHERE
+        id = ?;
+`;
 

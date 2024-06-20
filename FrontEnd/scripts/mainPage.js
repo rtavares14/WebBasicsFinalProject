@@ -45,7 +45,7 @@ function renderAlbum(album, albumContainer) {
             <img src="${album.albumCover}" alt="${album.albumName}">
             <div class="album-info-box">
                 <div class="album-info album-name" style="cursor: pointer;">${album.albumName}</div>
-                <div class="album-info artist-name" style="cursor: pointer;">${album.artistName}</div>
+                <div class="album-info artist-name" style="cursor: pointer;" data-artist-id="${album.artist_id}">${album.artistName}</div>
             </div>
         </a>
         <div class="album-info album-rating">Rating ${album.albumRate}/10</div>
@@ -61,7 +61,7 @@ function renderAlbum(album, albumContainer) {
 
     artistNameEl.addEventListener('click', (event) => {
         event.preventDefault();
-        redirectToArtist(album.artistName);
+        redirectToArtist(album.artist_id);
     });
 
     albumContainer.appendChild(albumEl);

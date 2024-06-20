@@ -2,7 +2,7 @@ const albumsRated = [
     {
         albumName: "Queen Is Dead",
         artistName: "The Smiths",
-        numberOfTracks: 0,
+        numberOfTracks: 3,
         genre: "Indie Rock",
         description: "An iconic album known for its poetic lyrics and unique sound.",
         albumRate: 8.5,
@@ -11,7 +11,7 @@ const albumsRated = [
     {
         albumName: "College Dropout",
         artistName: "Kanye West",
-        numberOfTracks: 0,
+        numberOfTracks: 5,
         genre: "Hip Hop",
         description: "Kanye West's debut album, a mix of soul samples and introspective lyrics.",
         albumRate: 10,
@@ -20,7 +20,7 @@ const albumsRated = [
     {
         albumName: "Currents",
         artistName: "Tame Impala",
-        numberOfTracks: 0,
+        numberOfTracks: 4,
         genre: "Psychedelic Rock",
         description: "A critically acclaimed album with a lush, dreamy soundscape.",
         albumRate: 10,
@@ -29,7 +29,7 @@ const albumsRated = [
     {
         albumName: "The Slow Rush",
         artistName: "Tame Impala",
-        numberOfTracks: 0,
+        numberOfTracks: 6,
         genre: "Psychedelic Pop",
         description: "A captivating album with themes of time and change.",
         albumRate: 9.2,
@@ -38,7 +38,7 @@ const albumsRated = [
     {
         albumName: "Nectar",
         artistName: "Joji",
-        numberOfTracks: 0,
+        numberOfTracks: 2,
         genre: "R&B",
         description: "Joji's second studio album, featuring a blend of lo-fi and electronic sounds.",
         albumRate: 9.4,
@@ -47,7 +47,7 @@ const albumsRated = [
     {
         albumName: "Astroworld",
         artistName: "Travis Scott",
-        numberOfTracks: 0,
+        numberOfTracks: 4,
         genre: "Hip Hop",
         description: "A highly praised album with atmospheric production and dynamic tracks.",
         albumRate: 9.8,
@@ -56,7 +56,7 @@ const albumsRated = [
     {
         albumName: "Blonde",
         artistName: "Frank Ocean",
-        numberOfTracks: 0,
+        numberOfTracks: 3,
         genre: "R&B",
         description: "Frank Ocean's introspective and genre-defying masterpiece.",
         albumRate: 9.8,
@@ -65,7 +65,7 @@ const albumsRated = [
     {
         albumName: "After Hours",
         artistName: "The Weeknd",
-        numberOfTracks: 0,
+        numberOfTracks: 6,
         genre: "Synthwave",
         description: "A dark and cinematic album from The Weeknd.",
         albumRate: 9.2,
@@ -74,7 +74,7 @@ const albumsRated = [
     {
         albumName: "Take Care",
         artistName: "Drake",
-        numberOfTracks: 0,
+        numberOfTracks: 5,
         genre: "Hip Hop",
         description: "Drake's breakthrough album, blending rap with R&B influences.",
         albumRate: 9.5,
@@ -83,7 +83,7 @@ const albumsRated = [
     {
         albumName: "Awaken, My Love!",
         artistName: "Childish Gambino",
-        numberOfTracks: 0,
+        numberOfTracks: 4,
         genre: "Funk",
         description: "A genre-bending album with strong funk and soul influences.",
         albumRate: 9.1,
@@ -92,7 +92,7 @@ const albumsRated = [
     {
         albumName: "Art Angels",
         artistName: "Grimes",
-        numberOfTracks: 0,
+        numberOfTracks: 5,
         genre: "Electropop",
         description: "A vibrant and eclectic album from Grimes.",
         albumRate: 8.6,
@@ -101,7 +101,7 @@ const albumsRated = [
     {
         albumName: "Starboy",
         artistName: "The Weeknd",
-        numberOfTracks: 0,
+        numberOfTracks: 3,
         genre: "R&B",
         description: "A slick and polished album with a mix of R&B and pop influences.",
         albumRate: 8.7,
@@ -110,7 +110,7 @@ const albumsRated = [
     {
         albumName: "Channel Orange",
         artistName: "Frank Ocean",
-        numberOfTracks: 0,
+        numberOfTracks: 6,
         genre: "R&B",
         description: "A critically acclaimed album known for its unique storytelling and production.",
         albumRate: 10,
@@ -119,7 +119,7 @@ const albumsRated = [
     {
         albumName: "Because Internet",
         artistName: "Childish Gambino",
-        numberOfTracks: 0,
+        numberOfTracks: 2,
         genre: "Hip Hop",
         description: "A concept album that delves into the digital age and its effects on modern life.",
         albumRate: 9,
@@ -128,7 +128,7 @@ const albumsRated = [
     {
         albumName: "Visions",
         artistName: "Grimes",
-        numberOfTracks: 0,
+        numberOfTracks: 3,
         genre: "Synthpop",
         description: "An experimental album with dreamy and ethereal soundscapes.",
         albumRate: 8.5,
@@ -137,7 +137,7 @@ const albumsRated = [
     {
         albumName: "Scorpion",
         artistName: "Drake",
-        numberOfTracks: 0,
+        numberOfTracks: 6,
         genre: "Hip Hop",
         description: "A double album that showcases Drake's versatility as an artist.",
         albumRate: 8.9,
@@ -227,7 +227,7 @@ const artists = [
         artistRate: 8.2,
         sawItLive: "NO :(",
         artistDescription: "A Canadian rapper, singer, songwriter, and actor.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Drake_July_2016.jpg/330px-Drake_July_2016.jpg"
+        artistPhoto: "https://i.discogs.com/XMLZGAbzEYSoyoKjfLMiqLAvUdC-u_UdlFz0TZTjFW0/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTE1MTE5/OS0xNjU1NTczODc5/LTgyMDMuanBlZw.jpeg"
     },
     {
         artistName: "Frank Ocean",
@@ -235,7 +235,7 @@ const artists = [
         artistRate: 10,
         sawItLive: "NO :(",
         artistDescription: "An American singer, songwriter, and rapper known for his unique musical style.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Frank_Ocean_2022_Blonded.jpg/330px-Frank_Ocean_2022_Blonded.jpg"
+        artistPhoto: "https://images.equipboard.com/uploads/user/image/10952/big_frank-ocean.jpeg?v=1718834256"
     },
     {
         artistName: "Steve Lacy",
@@ -243,7 +243,7 @@ const artists = [
         artistRate: 8.4,
         sawItLive: "NO :(",
         artistDescription: "An American musician, singer, songwriter, and record producer.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Steve_Lacy_%40_Rialto_Theatre.jpg/330px-Steve_Lacy_%40_Rialto_Theatre.jpg"
+        artistPhoto: "https://stanforddaily.com/wp-content/uploads/2022/08/Steve-Lacy-2022-Picture-Julian-Klincewicz-Press.jpeg?w=300&h=300&crop=1"
     },
     {
         artistName: "Grimes",
@@ -251,7 +251,7 @@ const artists = [
         artistRate: 8.9,
         sawItLive: "YES",
         artistDescription: "A Canadian musician, singer, songwriter, and record producer.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Grimes_Governors_Ball_2014_03_%28cropped%29.png/330px-Grimes_Governors_Ball_2014_03_%28cropped%29.png"
+        artistPhoto: "https://cdn01.justjared.com/wp-content/uploads/headlines/2020/10/grimes-movie-she-watched-with-son.jpg"
     },
     {
         artistName: "Childish Gambino",
@@ -259,7 +259,7 @@ const artists = [
         artistRate: 9.1,
         sawItLive: "NO :(",
         artistDescription: "An American actor, comedian, writer, producer, director, musician, and DJ.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Donald_Glover_TIFF_2015.jpg/330px-Donald_Glover_TIFF_2015.jpg"
+        artistPhoto: "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84a92b0e8f1802c51240b3ed0c"
     },
     {
         artistName: "The Weeknd",
@@ -267,7 +267,7 @@ const artists = [
         artistRate: 9.5,
         sawItLive: "YES",
         artistDescription: "A Canadian singer, songwriter, and record producer.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/The_Weeknd_Cannes_2023.png/330px-The_Weeknd_Cannes_2023.png"
+        artistPhoto: "https://images.sk-static.com/images/media/profile_images/artists/4363463/huge_avatar"
     },
     {
         artistName: "Travis Scott",
@@ -275,7 +275,7 @@ const artists = [
         artistRate: 9.0,
         sawItLive: "YES",
         artistDescription: "An American rapper, singer, songwriter, and record producer.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Travis_Scott_-_Openair_Frauenfeld_2019_08.jpg/330px-Travis_Scott_-_Openair_Frauenfeld_2019_08.jpg"
+        artistPhoto: "https://i.pinimg.com/originals/07/65/7f/07657fc0a1d29a79927fbe35f98e548e.jpg"
     },
     {
         artistName: "Joji",
@@ -283,7 +283,7 @@ const artists = [
         artistRate: 8.8,
         sawItLive: "NO :(",
         artistDescription: "A Japanese singer, songwriter, rapper, comedian, and former YouTuber.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Joji_Performing_Live_in_2018_%28cropped%29_%28better_quality%29.png"
+        artistPhoto: "https://e.snmc.io/i/300/s/ac860e6336720504ccc53b9bfba53875/9292395"
     },
     {
         artistName: "Tame Impala",
@@ -291,7 +291,7 @@ const artists = [
         artistRate: 9.2,
         sawItLive: "YES",
         artistDescription: "An Australian psychedelic music project led by multi-instrumentalist Kevin Parker.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tame_Impala_at_Flow_Festival_Helsinki_Aug_10_2019_-24.jpg/450px-Tame_Impala_at_Flow_Festival_Helsinki_Aug_10_2019_-24.jpg"
+        artistPhoto: "https://blog.seetickets.com/wp-content/uploads/tame-impala-1369463778-300x300.jpg"
     },
     {
         artistName: "Kanye West",
@@ -299,7 +299,7 @@ const artists = [
         artistRate: 9.3,
         sawItLive: "YES",
         artistDescription: "An American rapper, singer, songwriter, record producer, and fashion designer.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg/330px-Kanye_West_at_the_2009_Tribeca_Film_Festival_%28crop_2%29.jpg"
+        artistPhoto: "https://fghsnews.com/wp-content/uploads/2021/01/kanye-west-attends-the-christian-dior-show-as-part-of-the-paris-fashion-week-womenswear-fall-winter-2015-2016-on-march-6-2015-in-paris-france-photo-by-dominique-charriau-wireimage-square.jpg"
     },
     {
         artistName: "The Smiths",
@@ -307,7 +307,7 @@ const artists = [
         artistRate: 8.7,
         sawItLive: "NO :(",
         artistDescription: "An English rock band formed in Manchester in 1982.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/The_Smiths_%281984_Sire_publicity_photo%29_002.jpg/390px-The_Smiths_%281984_Sire_publicity_photo%29_002.jpg"
+        artistPhoto: "https://photos.bandsintown.com/thumb/205833.jpeg"
     },
     {
         artistName: "Taylor Swift",
@@ -315,7 +315,7 @@ const artists = [
         artistRate: 9.4,
         sawItLive: "YES",
         artistDescription: "An American singer-songwriter.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/330px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png"
+        artistPhoto: "https://resizing.flixster.com/v7rx64b6hdOdKMdpj-Ov1l-wt6I=/300x300/v2/https://resizing.flixster.com/8tk6CP6Wek1zsz-P7_d8poo1o48=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzFkZjVkYTgzLWI5MWEtNGIwNS1hYzU4LWU4ODk1ZWNjMmZlOS5qcGc="
     },
     {
         artistName: "Cigarettes After Sex",
@@ -323,7 +323,7 @@ const artists = [
         artistRate: 8.6,
         sawItLive: "NO :(",
         artistDescription: "An American ambient pop band.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/POS17_%40Kristsll-197_%2835166607974%29.jpg/390px-POS17_%40Kristsll-197_%2835166607974%29.jpg"
+        artistPhoto: "https://images.sk-static.com/images/media/profile_images/artists/4114466/huge_avatar"
     },
     {
         artistName: "Lana Del Rey",
@@ -331,7 +331,7 @@ const artists = [
         artistRate: 9.0,
         sawItLive: "NO :(",
         artistDescription: "An American singer, songwriter, and record producer.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Lana_Del_Rey_%40_Grammy_Museum_10_13_2019_%2849311023203%29.jpg/330px-Lana_Del_Rey_%40_Grammy_Museum_10_13_2019_%2849311023203%29.jpg"
+        artistPhoto: "https://i.scdn.co/image/ab6761610000e5ebb99cacf8acd5378206767261"
     },
     {
         artistName: "TV Girl",
@@ -339,7 +339,7 @@ const artists = [
         artistRate: 8.5,
         sawItLive: "NO :(",
         artistDescription: "An American indie pop band.",
-        artistPhoto: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/TV_Girl_au_Casa_Del_Popolo_--_1.jpg/450px-TV_Girl_au_Casa_Del_Popolo_--_1.jpg"
+        artistPhoto: "https://f4.bcbits.com/img/a1540259462_2.jpg"
     }
 ]
 
