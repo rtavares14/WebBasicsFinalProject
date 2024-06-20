@@ -1,22 +1,6 @@
-import Database from "better-sqlite3";
 import { albumsRated, albumsToListening, artists,tracks } from "../data/dummy-date.js";
 import * as queries from "./databasequerys.js";
-
-// Create a new DB file
-export let db;
-
-try {
-    db = new Database('../../db/data.sqlite');
-    db.prepare(queries.createArtistTable).run();
-    db.prepare(queries.createAlbumsTable).run();
-    db.prepare(queries.createTracksTable).run();
-
-    insertDummyData();
-
-} catch (e) {
-    console.error("Error while initializing db!", e);
-    throw e;
-}
+import {db} from "./database.js";
 
 function getArtistIdByName(artistName) {
     const stmt = db.prepare(queries.getArtistIdByNameQuery);
@@ -24,7 +8,7 @@ function getArtistIdByName(artistName) {
     return result ? result.id : null; // Return null if artistName doesn't exist
 }
 
-function insertDummyData() {
+export function insertDummyData() {
     const nrOfAlbums = countAlbums();
     console.log("insertDummyData started");
 

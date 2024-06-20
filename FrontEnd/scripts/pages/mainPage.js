@@ -8,9 +8,7 @@ async function getAlbums() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
-        console.log("Fetched albums:", data); // Log the fetched data
-        return data;
+        return await response.json();
     } catch (error) {
         console.error("Error fetching albums:", error);
         return [];

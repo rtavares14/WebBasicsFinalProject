@@ -91,7 +91,7 @@ async function sendAlbumData() {
             body: JSON.stringify(albumFromForm)
         });
 
-        window.location.assign("../pages/to_listening.html")
+        window.location.assign("../../pages/to_listening.html")
     } catch (e){
         console.log(e)
     }

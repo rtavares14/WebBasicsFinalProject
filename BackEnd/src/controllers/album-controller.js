@@ -1,18 +1,43 @@
 import statusCodes from "http-status-codes"
-import Database from "better-sqlite3";
 import * as queries from "../database/databasequerys.js";
+import {db} from "../database/database.js";
 
 
-export let db;
+export function getAlbumById(req, res) {
+    const albumId = req.params.albumId;
+    console.log('Requested album ID:', albumId);
 
-try {
-    db = new Database('db/data.sqlite');
-
-} catch (e) {
-    console.error("Error while initializing db!", e);
-    throw e;
+    try {
+        const album = db.prepare(queries.getAlbumById).get(albumId);
+        if (album) {
+            console.log('Retrieved album:', album);
+            res.json(album);
+        } else {
+            res.status(statusCodes.NOT_FOUND).json({ error: "Album not found" });
+        }
+    } catch (err) {
+        console.error("Error retrieving album with id:", err);
+        res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });
+    }
 }
 
+export function getArtistById(req, res) {
+    const artistId = req.params.artistId;
+    console.log('Requested artist ID:', artistId);
+
+    try {
+        const artist = db.prepare(queries.getArtistByIdQuery).get(artistId);
+        if (artist) {
+            console.log('Retrieved Artist:', artist);
+            res.json(artist);
+        } else {
+            res.status(statusCodes.NOT_FOUND).json({ error: "Artist not found" });
+        }
+    } catch (err) {
+        console.error("Error retrieving artist with ID:", err);
+        res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });
+    }
+}
 export function getAllAlbums(req, res) {
     try {
         const albums = db.prepare(queries.getAlbumsWithRatingQuery).all();
@@ -22,8 +47,16 @@ export function getAllAlbums(req, res) {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
-
-export function addAblum(req, res) {
+export function getAllAlbumsToListening(req, res) {
+    try {
+        const albums = db.prepare(queries.getAlbumsWithoutRatingQuery).all();
+        res.json(albums);
+    } catch (error) {
+        console.error("Error retrieving albums:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+export function addAlbum(req, res) {
     const { albumName, artistName, numberOfTracks, genre, description, albumCover } = req.body;
     const album = { albumName, artistName, numberOfTracks, genre, description, albumCover };
 
@@ -48,13 +81,11 @@ export function addAblum(req, res) {
         res.status(500).json({ error: "Failed to add album." });
     }
 }
-
 function getArtistIdByName(artistName) {
     const stmt = db.prepare(queries.getArtistIdByNameQuery);
     const result = stmt.get(artistName);
     return result ? result.id : null;
 }
-
 function validateAlbumData(album) {
     if (isStringEmpty(album.albumName) || isStringEmpty(album.artistName) || isStringEmpty(album.albumCover)) {
         throw {
@@ -70,7 +101,7 @@ function validateAlbumData(album) {
         };
     }
 }
-
 function isStringEmpty(str) {
     return !str || str.trim().length === 0;
 }
+

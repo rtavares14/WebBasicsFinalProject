@@ -1,12 +1,14 @@
 import express from "express";
-import * as mainPageController from "../controllers/maim-page-album-controller.js";
-import * as albumPageController from "../controllers/album-page-controller.js";
+import * as albumController from "../controllers/album-controller.js";
 
 const albumRouter = express.Router();
 
-albumRouter.get("/",mainPageController.getAllAlbums)
-albumRouter.post("/",mainPageController.addAblum)
-albumRouter.get("/artists/:artistId",albumPageController.getArtistById);
-albumRouter.get("/:albumId",albumPageController.getAlbumById);
+albumRouter.get("/",albumController.getAllAlbums)
+albumRouter.get("/tolistening",albumController.getAllAlbumsToListening)
+
+albumRouter.post("/",albumController.addAlbum)
+//albumRouter.post("/",mainPageController.addArtist)
+albumRouter.get("/artists/:artistId",albumController.getArtistById);
+albumRouter.get("/:albumId",albumController.getAlbumById);
 
 export default albumRouter;

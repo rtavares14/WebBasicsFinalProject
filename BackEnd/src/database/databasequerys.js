@@ -120,3 +120,12 @@ export const getArtistByIdQuery = `
         id = ?;
 `;
 
+
+export const getTracksFromAlbum = `
+    SELECT
+        *
+    FROM
+        tracks
+    WHERE
+        album_id = ?;
+`;

@@ -1,7 +1,7 @@
 // Modules required and express initialization
 import express from 'express';
 import albumRouter from './routers/album-router.js';
-import toListeningRouter from './routers/to-listening-router.js';
+import trackRouter from "./routers/track-router.js";
 import cors from 'cors';
 
 // Initializing express and creating the port variable
@@ -16,9 +16,7 @@ app.use(express.urlencoded({extended : true}))
 // Use the user albumRouter to handle all the albums rated routes
 app.use('/albums', albumRouter);
 
-// Use the user toListeningRouter to handle all the albums to listening routes
-app.use('/tolistening', toListeningRouter);
-
+app.use('/tracks', trackRouter);
 
 
 // Global error handler middleware

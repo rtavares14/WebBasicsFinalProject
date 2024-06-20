@@ -144,7 +144,6 @@ const albumsRated = [
         albumCover: "https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg"
     }
 ];
-
 const albumsToListening = [
     {
         albumName: "French Exit",
@@ -219,7 +218,6 @@ const albumsToListening = [
         description: "A critically acclaimed album blending various genres and innovative production."
     }
 ];
-
 const artists = [
     {
         artistName: "Drake",
@@ -342,7 +340,6 @@ const artists = [
         artistPhoto: "https://f4.bcbits.com/img/a1540259462_2.jpg"
     }
 ]
-
 const tracks = [
     { trackName: "The Queen Is Dead", trackDuration: "6:24", trackRate: 9, trackNumber: 1, album_id: 1 },
     { trackName: "Frankly, Mr. Shankly", trackDuration: "2:17", trackRate: 8, trackNumber: 2, album_id: 1 },
@@ -412,6 +409,5 @@ const tracks = [
     { trackName: "God's Plan", trackDuration: "3:18", trackRate: 10, trackNumber: 5, album_id: 16 },
     { trackName: "I'm Upset", trackDuration: "3:34", trackRate: 8, trackNumber: 6, album_id: 16 }
 ];
-
 
 export {albumsToListening, albumsRated, artists, tracks} ;

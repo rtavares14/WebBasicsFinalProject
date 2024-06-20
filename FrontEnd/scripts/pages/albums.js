@@ -43,6 +43,15 @@ async function pageLoad() {
         albumCoverEl.src = albumData.albumCover;
         albumCoverEl.alt = albumData.albumName;
 
+
+        // Populate track list
+        const trackListEl = document.querySelector('.album-track-list');
+        trackListEl.innerHTML = '';
+        albumData.tracks.forEach((track, index) => {
+            const trackEl = document.createElement('div');
+            trackEl.textContent = `Track number ${index + 1} -- ${track.name} -- ${track.duration} -- ${track.rating}/10`;
+            trackListEl.appendChild(trackEl);
+        });
     }
 }
 
