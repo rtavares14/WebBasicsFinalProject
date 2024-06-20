@@ -1,3 +1,11 @@
+//TODO to get tracks:
+/*
+* 1. Redirect user to main page, if no album was found by id in url [MAIN]
+* 2. Create a function that fetches the localhost:3000/tracks?albumId=${PUT_URL_ID_HERE}
+* 3. If everything is ok (fetch didn't give error). Get tracks from API using function u created,
+*  loop through them and for each create html card or however you want to display them.
+* */
+
 // Function to get the album ID from the URL
 function getAlbumIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -17,6 +25,7 @@ async function fetchAlbumData(artistId) {
 
 async function pageLoad() {
     const albumId = getAlbumIdFromUrl();
+    // const tracks = urFunc()
 
     const albumData = await fetchAlbumData(albumId);
     if (albumData) {
