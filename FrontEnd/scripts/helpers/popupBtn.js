@@ -104,7 +104,7 @@ async function sendArtistData() {
     console.log("Obj from form ", artistFromForm)
 
     try {
-        const response = await fetch(`http://localhost:3000/artist`, {
+        const response = await fetch(`http://localhost:3000/artists`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -112,8 +112,27 @@ async function sendArtistData() {
             body: JSON.stringify(artistFromForm)
         });
 
-        //window.location.assign("../pages/to_listening.html")
+        if (response.status === 400) {
+            const result = await response.json();
+            console.log(result.error); // Log the error message
+
+            // Close the popup
+            closePopup();
+        } else if (response.ok) {
+            // Successfully added the artist
+            console.log('Artist added successfully');
+            // Optionally redirect or update the UI
+            window.location.assign("../pages/to_listening.html");
+        }
     } catch (e) {
-        console.log(e)
+        console.log(e);
+    }
+}
+
+// Function to close the popup
+function closePopup() {
+    const popup = document.getElementById('artistPopup');
+    if (popup) {
+        popup.style.display = 'none';
     }
 }

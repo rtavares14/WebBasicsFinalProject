@@ -25,9 +25,9 @@ async function pageLoad() {
         document.querySelector('.album-info .album-info-item:nth-child(2)').textContent = `Artist name: ${albumData.artistName}`;
 
         if (albumData.tracksCount > 1) {
-            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is composed by ${albumData.tracksCount} tracks and its genre is ${albumData.genre}`;
+            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is has ${albumData.tracksCount} tracks and its genre is ${albumData.genre}`;
         } else {
-            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is composed by 0 tracks at the moment and its genre is ${albumData.genre}`;
+            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is has 0 tracks at the moment and its genre is ${albumData.genre}`;
             document.querySelector('.album-tracks-title').textContent = `Track list:`;
             document.querySelector('.album-tracks-text').textContent = `No tracks at the moment`;
         }

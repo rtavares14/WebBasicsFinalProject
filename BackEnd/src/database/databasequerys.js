@@ -9,13 +9,13 @@ export const createAlbumsTable = `
                                           description TEXT NULL,
                                           albumCover TEXT,
                                           artist_id INTEGER,
-                                          FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE
+                                          FOREIGN KEY (artist_id) REFERENCES artists(id) 
         );`
 
 export const createArtistTable = `
     CREATE TABLE IF NOT EXISTS artists (
                                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                           artistName TEXT,
+                                           artistName TEXT UNIQUE,
                                            firstPlaceHearIt TEXT NULL,
                                            artistRate INTEGER,
                                            sawItLive TEXT,
@@ -137,4 +137,27 @@ export const getAlbumsFromArtist = `
         albums
     WHERE
         artist_id = ?;
+`;
+export const getArtistByNameQuery = `
+    SELECT
+        id
+    FROM
+        artists
+    WHERE
+        artistName = ?;
+`;
+
+export const getAlbumsFromArtistByName = `
+    SELECT
+        *
+    FROM
+        albums
+    WHERE
+        artistName = ?;
+`;
+
+export const updateAlbumByAddingArtistID  = `
+    UPDATE albums
+    SET artist_id = ?
+    WHERE id = ?;
 `;

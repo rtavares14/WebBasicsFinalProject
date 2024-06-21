@@ -2,6 +2,7 @@
 import express from 'express';
 import albumRouter from './routers/album-router.js';
 import trackRouter from "./routers/track-router.js";
+import artistRouter from "./routers/artist-router.js";
 import cors from 'cors';
 
 // Initializing express and creating the port variable
@@ -17,6 +18,8 @@ app.use(express.urlencoded({extended : true}))
 app.use('/albums', albumRouter);
 
 app.use('/tracks', trackRouter);
+
+app.use('/artists', artistRouter);
 
 
 // Global error handler middleware

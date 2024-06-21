@@ -37,3 +37,7 @@ Add artist
 Delete artist
 Delete album
 Delete track?
+
+overflow for album 3 div
+
+http://localhost:63343/album-detail.css/FrontEnd/pages/artist.html?artistId=null if null bomba

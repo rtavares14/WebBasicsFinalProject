@@ -47,6 +47,7 @@
     background-color: #1B4242;
     padding: 10px;
     border-radius: 5px;
+    overflow: auto;
 }
 
 .album-description {
