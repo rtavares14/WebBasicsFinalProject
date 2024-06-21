@@ -5,9 +5,13 @@ const albumRouter = express.Router();
 
 albumRouter.get("/",albumController.getAllAlbums)
 albumRouter.get("/tolistening",albumController.getAllAlbumsToListening)
-
-albumRouter.post("/",albumController.addAlbum)
-albumRouter.get("/artists/:artistId",albumController.getArtistById);
 albumRouter.get("/:albumId",albumController.getAlbumById);
+
+
+albumRouter.post("/",albumController.addAlbum);
+
+
+albumRouter.delete("/:albumId",albumController.deleteAlbumById);
+
 
 export default albumRouter;

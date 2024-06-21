@@ -161,3 +161,11 @@ export const updateAlbumByAddingArtistID  = `
     SET artist_id = ?
     WHERE id = ?;
 `;
+
+export const deleteAlbum  = `
+    delete from albums where id = ?;
+`;
+
+export const deleteArtist  = `
+    delete from artists where id = ?;
+`;

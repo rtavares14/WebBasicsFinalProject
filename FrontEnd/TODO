@@ -1,7 +1,7 @@
 ****AVG rating functionally
 
 ****POST/add album to db
-POST/add artist to bd
+****POST/add artist to bd
 POST/add track to album db
 
 DELETE artist
@@ -33,11 +33,15 @@ BACK END BACK END           BACK END              BACK END          BACK END BAC
 
 dropdown when add an artist in album
 Add track
-Add artist
+****Add artist
 Delete artist
-Delete album
+****Delete album
 Delete track?
 
 overflow for album 3 div
 
 http://localhost:63343/album-detail.css/FrontEnd/pages/artist.html?artistId=null if null bomba
+
+
+
+style the small popup when i delete album

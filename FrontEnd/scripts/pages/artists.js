@@ -6,7 +6,7 @@ function getArtistNameFromUrl() {
 
 // Function to fetch the album data from the backend
 async function fetchArtistData(artistId) {
-    const response = await fetch(`http://localhost:3000/albums/artists/${artistId}`);
+    const response = await fetch(`http://localhost:3000/artists/${artistId}`);
     if (response.status === 200) {
         const data = await response.json();
         return data;

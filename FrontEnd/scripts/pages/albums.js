@@ -5,14 +5,46 @@ function getAlbumIdFromUrl() {
 }
 
 // Function to fetch the album data from the backend
-async function fetchAlbumData(artistId) {
-    const response = await fetch(`http://localhost:3000/albums/${artistId}`);
+async function fetchAlbumData(albumId) {
+    const response = await fetch(`http://localhost:3000/albums/${albumId}`);
     if (response.status === 200) {
         const data = await response.json();
         return data;
     } else {
-        console.error(`Failed to fetch artist data: ${response.status}`);
+        console.error(`Failed to fetch album data: ${response.status}`);
         return null;
+    }
+}
+
+// Function to send a DELETE request to the backend
+async function deleteAlbum(albumId) {
+    try {
+        const response = await fetch(`http://localhost:3000/albums/${albumId}`, {
+            method: 'DELETE'
+        });
+
+        if (response.status === 200) {
+            alert('Album deleted successfully.');
+            window.location.assign("index.html");
+        } else {
+            console.error(`Failed to delete album: ${response.status}`);
+            alert('Failed to delete album.');
+        }
+    } catch (e) {
+        console.error('Error:', e);
+        alert('An error occurred while deleting the album.');
+    }
+}
+
+// Function to handle the delete button click
+function handleDeleteButtonClick() {
+    const albumId = getAlbumIdFromUrl();
+    if (albumId) {
+        if (confirm('Are you sure you want to delete this album?')) {
+            deleteAlbum(albumId);
+        }
+    } else {
+        console.error('Album ID not found in URL');
     }
 }
 
@@ -25,9 +57,9 @@ async function pageLoad() {
         document.querySelector('.album-info .album-info-item:nth-child(2)').textContent = `Artist name: ${albumData.artistName}`;
 
         if (albumData.tracksCount > 1) {
-            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is has ${albumData.tracksCount} tracks and its genre is ${albumData.genre}`;
+            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album has ${albumData.tracksCount} tracks and its genre is ${albumData.genre}`;
         } else {
-            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is has 0 tracks at the moment and its genre is ${albumData.genre}`;
+            document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album has 0 tracks at the moment and its genre is ${albumData.genre}`;
             document.querySelector('.album-tracks-title').textContent = `Track list:`;
             document.querySelector('.album-tracks-text').textContent = `No tracks at the moment`;
         }
@@ -56,7 +88,7 @@ async function pageLoad() {
                 const trackEl = document.createElement('div');
                 trackEl.textContent = `Track nr: ${track.trackNumber} -- name: ${track.trackName} -- duration: ${track.trackDuration}m -- rate ${track.trackRate}/10`;
 
-                    trackListEl.appendChild(trackEl);
+                trackListEl.appendChild(trackEl);
             });
         } else {
             document.querySelector('.album-tracks-title').textContent = `Track list:`;
@@ -65,6 +97,11 @@ async function pageLoad() {
     }
 }
 
+// Add event listener to the delete button
 document.addEventListener('DOMContentLoaded', () => {
+    const deleteButton = document.querySelector('.album-action-button:nth-child(1)');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', handleDeleteButtonClick);
+    }
     pageLoad();
 });

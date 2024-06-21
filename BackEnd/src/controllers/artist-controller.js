@@ -7,8 +7,6 @@ export function addArtist(req, res) {
     const artist = { artistName, firstPlaceHearIt, artistRate, sawItLive, artistDescription, artistPhoto };
 
     try {
-        // Assigen all albums to this artist
-
         // Check if the artist already exists
         if (isArtistNameExists(artist.artistName)) {
             return res.status(400).json({ error: "Artist already exists." });
@@ -43,6 +41,51 @@ export function addArtist(req, res) {
         res.status(500).json({ error: "Failed to add album." });
     }
 }
+
+export function getArtistById(req, res) {
+    const artistId = req.params.artistId;
+    console.log('Requested artist ID:', artistId);
+
+    try {
+        const artist = db.prepare(queries.getArtistByIdQuery).get(artistId);
+        if (artist) {
+            console.log('Retrieved Artist:', artist);
+
+            const albums = db.prepare(queries.getAlbumsFromArtist).all(artistId);
+
+            const ArtistWithAlbums = {
+                ...artist,
+                albums: albums
+            };
+
+            res.json(ArtistWithAlbums);
+        } else {
+            res.status(statusCodes.NOT_FOUND).json({ error: "Artist not found" });
+        }
+    } catch (err) {
+        console.error("Error retrieving artist with ID:", err);
+        res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });
+    }
+}
+
+export function deleteArtist(req, res) {
+    const artistId = req.params.artistId;
+    console.log('Requested artist ID:', artistId);
+
+    try {
+        db.prepare(queries.deleteArtist).run(artistId)
+
+        // Send success response
+        res.status(200).json({ message: "Artist deleted successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to delete artist." });
+    }
+}
+
 
 function validateArtistData(artist) {
     if (isStringEmpty(artist.artistName) || isStringEmpty(artist.artistDescription) || isStringEmpty(artist.artistPhoto)) {
