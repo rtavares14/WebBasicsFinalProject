@@ -1,11 +1,3 @@
-//TODO to get tracks:
-/*
-* 1. Redirect user to main page, if no album was found by id in url [MAIN]
-* 2. Create a function that fetches the localhost:3000/tracks?albumId=${PUT_URL_ID_HERE}
-* 3. If everything is ok (fetch didn't give error). Get tracks from API using function u created,
-*  loop through them and for each create html card or however you want to display them.
-* */
-
 // Function to get the album ID from the URL
 function getAlbumIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -19,34 +11,35 @@ async function fetchAlbumData(artistId) {
         const data = await response.json();
         return data;
     } else {
+        console.error(`Failed to fetch artist data: ${response.status}`);
         return null;
     }
 }
 
 async function pageLoad() {
     const albumId = getAlbumIdFromUrl();
-    // const tracks = urFunc()
 
     const albumData = await fetchAlbumData(albumId);
     if (albumData) {
         document.querySelector('.album-info .album-info-item:nth-child(1)').textContent = `Album name: ${albumData.albumName}`;
         document.querySelector('.album-info .album-info-item:nth-child(2)').textContent = `Artist name: ${albumData.artistName}`;
 
-        if(albumData.tracksCount>1){
+        if (albumData.tracksCount > 1) {
             document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is composed by ${albumData.tracksCount} tracks and its genre is ${albumData.genre}`;
-        }
-        else{
+        } else {
             document.querySelector('.album-info .album-info-item:nth-child(3)').textContent = `This album is composed by 0 tracks at the moment and its genre is ${albumData.genre}`;
+            document.querySelector('.album-tracks-title').textContent = `Track list:`;
+            document.querySelector('.album-tracks-text').textContent = `No tracks at the moment`;
         }
 
-        if(albumData.albumRate>1){
+        if (albumData.albumRate > 1) {
             document.querySelector('.album-info .album-info-item:nth-child(4)').textContent = `Album rate: ${albumData.albumRate}/10`;
-        }
-        else{
+        } else {
             document.querySelector('.album-info .album-info-item:nth-child(4)').textContent = `Album rate: is 0 at the moment`;
         }
 
-        document.querySelector('.album-description').textContent = `Description: ${albumData.description}`;
+        document.querySelector('.album-description-title').textContent = `Description: `;
+        document.querySelector('.album-description-text').textContent = ` ${albumData.description}`;
 
         const albumCoverEl = document.querySelector('.album-cover');
         albumCoverEl.src = albumData.albumCover;
@@ -54,18 +47,24 @@ async function pageLoad() {
 
 
         // Populate track list
-        const trackListEl = document.querySelector('.album-track-list');
+        const trackListEl = document.querySelector('.album-tracks-text');
         trackListEl.innerHTML = '';
-        albumData.tracks.forEach((track, index) => {
-            const trackEl = document.createElement('div');
-            trackEl.textContent = `Track number ${index + 1} -- ${track.name} -- ${track.duration} -- ${track.rating}/10`;
-            trackListEl.appendChild(trackEl);
-        });
+        if (Object.keys(albumData.tracks).length > 0) {
+            albumData.tracks.forEach((track, index) => {
+                document.querySelector('.album-tracks-title').textContent = `Track list:`;
+                console.log(track)
+                const trackEl = document.createElement('div');
+                trackEl.textContent = `Track nr: ${track.trackNumber} -- name: ${track.trackName} -- duration: ${track.trackDuration}m -- rate ${track.trackRate}/10`;
+
+                    trackListEl.appendChild(trackEl);
+            });
+        } else {
+            document.querySelector('.album-tracks-title').textContent = `Track list:`;
+            document.querySelector('.album-tracks-text').textContent = `No tracks at the moment`;
+        }
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     pageLoad();
 });
-
-

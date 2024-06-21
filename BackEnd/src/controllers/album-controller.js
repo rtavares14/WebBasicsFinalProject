@@ -11,7 +11,14 @@ export function getAlbumById(req, res) {
         const album = db.prepare(queries.getAlbumById).get(albumId);
         if (album) {
             console.log('Retrieved album:', album);
-            res.json(album);
+            const tracks = db.prepare(queries.getTracksFromAlbum).all(albumId);
+
+            const albumWithTracks = {
+                ...album,
+                tracks: tracks
+            };
+
+            res.json(albumWithTracks);
         } else {
             res.status(statusCodes.NOT_FOUND).json({ error: "Album not found" });
         }
@@ -29,7 +36,15 @@ export function getArtistById(req, res) {
         const artist = db.prepare(queries.getArtistByIdQuery).get(artistId);
         if (artist) {
             console.log('Retrieved Artist:', artist);
-            res.json(artist);
+
+            const albums = db.prepare(queries.getAlbumsFromArtist).all(artistId);
+
+            const ArtistWithAlbums = {
+                ...artist,
+                albums: albums
+            };
+
+            res.json(ArtistWithAlbums);
         } else {
             res.status(statusCodes.NOT_FOUND).json({ error: "Artist not found" });
         }
@@ -73,6 +88,28 @@ export function addAlbum(req, res) {
 
         // Send success response
         res.status(200).json({ message: "Album added successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to add album." });
+    }
+}
+export function addArtist(req, res) {
+    const { artistName, firstPlaceHearIt, artistRate, sawItLive, artistDescription, artistPhoto } = req.body;
+    const artist = { artistName, firstPlaceHearIt, artistRate, sawItLive, artistDescription, artistPhoto };
+
+    try {
+        // Validate the artist data
+
+
+        // Assigen all albums to this artist
+
+        // Prepare the insert query
+
+        // Send success response
+        res.status(200).json({ message: "Artist added successfully." });
     } catch (error) {
         // Log the error
         console.error(error);

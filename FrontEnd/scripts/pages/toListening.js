@@ -36,7 +36,7 @@ function renderAlbum(album, albumContainer) {
                 <div class="album-info artist-name" style="cursor: pointer;" data-artist-id="${album.artist_id}">${album.artistName}</div>
             </div>
         </a>
-        <div class="album-info album-rating">Rating ${album.albumRate}/10</div>
+        <div class="album-info album-rating">Rating 0/10</div>
     `;
 
     const albumNameEl = albumEl.querySelector('.album-name');

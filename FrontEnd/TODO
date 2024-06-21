@@ -12,7 +12,7 @@ EDIT album
 EDIT artist
 
 ***PUT/get album info
-PUT/get artist info
+***PUT/get artist info
 
 ****Search css
 Search functionally
@@ -31,4 +31,9 @@ BACK END                    BACK END            END CK END          BACK END    
 BACK END BACK END           BACK END             END K END          BACK END BACK END
 BACK END BACK END           BACK END              BACK END          BACK END BACK END
 
-
+dropdown when add an artist in album
+Add track
+Add artist
+Delete artist
+Delete album
+Delete track?

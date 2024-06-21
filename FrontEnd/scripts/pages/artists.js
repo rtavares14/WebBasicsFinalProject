@@ -19,11 +19,6 @@ async function fetchArtistData(artistId) {
 async function pageLoad() {
     const artistId = getArtistNameFromUrl();
 
-    if (!artistId) {
-        console.error('Artist ID not found in URL');
-        return;
-    }
-
     const artistData = await fetchArtistData(artistId);
     if (artistData) {
         document.querySelector('.artist-info .artist-info-item:nth-child(1)').textContent = `Artist name: ${artistData.artistName}`;
@@ -31,27 +26,33 @@ async function pageLoad() {
         document.querySelector('.artist-info .artist-info-item:nth-child(3)').textContent = `Artist rate: ${artistData.artistRate}/10`;
         document.querySelector('.artist-info .artist-info-item:nth-child(4)').textContent = `Already saw it live: ${artistData.sawItLive}`;
 
+        document.querySelector('.artist-biography-title').textContent = `Description: `;
+        document.querySelector('.artist-biography-text').textContent = ` ${artistData.artistDescription}`;
 
         document.querySelector('.artist-photo').src = artistData.artistPhoto;
         document.querySelector('.artist-photo').alt = artistData.artistName;
 
-        const artistDiscographyEl = document.querySelector('.artist-discography');
-        if (artistDiscographyEl) artistDiscographyEl.textContent = artistData.description;
-        else console.error('.artist-discography not found');
-
-
 
         // Populate album list
-        const albumListEl = document.querySelector('.artist-discography-list');
-        if (albumListEl) {
-            albumListEl.innerHTML = '';
+        const artistListEl = document.querySelector('.artist-discography-text');
+        artistListEl.innerHTML = '';
+        if (Object.keys(artistData.albums).length > 0) {
             artistData.albums.forEach((album, index) => {
-                const albumEl = document.createElement('div');
-                albumEl.textContent = `Album number ${index + 1} -- ${album.title} -- ${album.tracks} tracks`;
-                albumListEl.appendChild(albumEl);
+                document.querySelector('.artist-discography-title').textContent = `Albums list:`;
+                console.log(album)
+                const trackEl = document.createElement('div');
+                if(album.albumRate > 0){
+                    trackEl.textContent = `Album nr: ${index+1} -- name: ${album.albumName} (tracks: ${album.numberOfTracks}) -- rate ${album.albumRate}/10`;
+                }
+                else {
+                    trackEl.textContent = `Album nr: ${index+1} -- name: ${album.albumName} (tracks: ${album.numberOfTracks}) -- rate 0/10`;
+                }
+
+                artistListEl.appendChild(trackEl);
             });
         } else {
-            console.error('.artist-discography-list not found');
+            document.querySelector('.artist-discography-title').textContent = `Track list:`;
+            document.querySelector('.artist-discography-text').textContent = `No tracks at the moment`;
         }
     } else {
         console.error('No artist data found');

@@ -7,7 +7,7 @@ albumRouter.get("/",albumController.getAllAlbums)
 albumRouter.get("/tolistening",albumController.getAllAlbumsToListening)
 
 albumRouter.post("/",albumController.addAlbum)
-//albumRouter.post("/",mainPageController.addArtist)
+albumRouter.post("/",albumController.addArtist)
 albumRouter.get("/artists/:artistId",albumController.getArtistById);
 albumRouter.get("/:albumId",albumController.getAlbumById);
 

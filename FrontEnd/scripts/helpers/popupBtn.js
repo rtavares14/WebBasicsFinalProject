@@ -83,7 +83,7 @@ async function sendAlbumData() {
     console.log("Obj from form ", albumFromForm)
 
     try {
-        const response = await fetch(`http://localhost:3000/tolistening`, {
+        const response = await fetch(`http://localhost:3000/albums`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ async function sendAlbumData() {
             body: JSON.stringify(albumFromForm)
         });
 
-        window.location.assign("../../pages/to_listening.html")
+        window.location.assign("to_listening.html")
     } catch (e){
         console.log(e)
     }
