@@ -75,3 +75,27 @@
     </div>
 </div>
 
+<!-- Popup for adding new track -->
+<div id="trackPopup" class="popup">
+    <div class="popup-content">
+        <h2>Add new Track to the vault</h2>
+        <form id="trackForm">
+            <label for="trackName">Name of the track:</label>
+            <input type="text" id="trackName" name="trackName" required>
+
+            <label for="trackDuration">Duration of the track:</label>
+            <input type="text" id="trackDuration" name="trackDuration" required>
+
+            <label for="trackRate">Track rate (out of 10):</label>
+            <input type="number" id="trackRate" name="trackRate" min="0" max="10">
+
+            <label for="trackNumber">Track number:</label>
+            <input type="number" id="trackNumber" name="trackNumber" min="1">
+
+            <div class="form-buttons">
+                <button type="submit">Save track</button>
+                <button type="button" id="cancelTrackBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

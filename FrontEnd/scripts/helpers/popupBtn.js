@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const mainPopup = document.getElementById('popup');
             const artistPopup = document.getElementById('artistPopup');
+            const trackPopup = document.getElementById('trackPopup'); // Add this line
             const cancelBtn = document.getElementById('cancelBtn');
             const cancelArtistBtn = document.getElementById('cancelArtistBtn');
-            const albumForm = document.getElementById('albumForm');
-            const artistForm = document.getElementById('artistForm');
+            const cancelTrackBtn = document.getElementById('cancelTrackBtn'); // Add this line
 
             openAddAlbumPopup.addEventListener('click', () => {
                 initialPopup.style.display = 'none';
@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 artistPopup.style.display = 'none';
             });
 
+            // Handle cancel button for track popup
+            cancelTrackBtn.addEventListener('click', () => {
+                trackPopup.style.display = 'none';
+            });
+
             window.addEventListener('click', (event) => {
                 if (event.target === initialPopup) {
                     initialPopup.style.display = 'none';
@@ -56,7 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (event.target === artistPopup) {
                     artistPopup.style.display = 'none';
                 }
+                if (event.target === trackPopup) { // Add this condition
+                    trackPopup.style.display = 'none';
+                }
             });
+
+            const albumForm = document.getElementById('albumForm');
+            const artistForm = document.getElementById('artistForm');
+            const trackForm = document.getElementById('trackForm'); // Add this line
 
             albumForm.addEventListener('submit', (event) => {
                 event.preventDefault();
@@ -66,6 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
             artistForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 sendArtistData();
+            });
+
+            trackForm.addEventListener('submit', (event) => { // Add this block
+                event.preventDefault();
+                sendTrackData();
             });
         })
         .catch(error => console.error('Error loading popups.html:', error));

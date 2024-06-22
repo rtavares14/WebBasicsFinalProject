@@ -2,28 +2,26 @@ import statusCodes from "http-status-codes"
 import * as queries from "../database/databasequerys.js";
 import {db} from "../database/database.js";
 
-export function getAllTracks(req, res){
-    const albumId = req.query.albumId;
+export function addTrackToAlbum(req, res) {
+    const album_id = req.params.albumId;
+    if (album_id) {
+        const foundAlbum = db.prepare(queries.getAlbumById).all(album_id);
+        console.log(foundAlbum);
 
-    if (albumId){
-        const foundAlbum = db.prepare(queries.getAlbumById).all(albumId);
-        console.log(foundAlbum)
-
-        if(foundAlbum.length < 1){
-            throw {
-                status: statusCodes.BAD_REQUEST,
-                message: "Invalid album id"
-            }
+        if (foundAlbum.length < 1) {
+            res.status(statusCodes.BAD_REQUEST).send({ message: "Invalid album id" });
+            return;
         }
 
-        const tracks = db.prepare(queries.getTracksFromAlbum).all(albumId);
+        const { trackName, trackDuration, trackRate, trackNumber } = req.body;
+        const trimmedTrackName = trackName.trim();
+        const trimmedTrackDuration = trackDuration.trim();
+        const addedTrack = db.prepare(queries.insertTrackQuery);
 
-        res.status(statusCodes.OK)
-        res.json(tracks)
+        addedTrack.run(trimmedTrackName, trimmedTrackDuration, trackRate, trackNumber, album_id);
+        res.status(statusCodes.OK).send({ message: "Track added successfully" });
     } else {
-        throw {
-            status: statusCodes.BAD_REQUEST,
-            message: "Specify which album id to get tracks from."
-        }
+        res.status(statusCodes.BAD_REQUEST).send({ message: "Album id is required" });
     }
 }
+

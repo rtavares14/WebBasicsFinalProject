@@ -5,7 +5,7 @@
 POST/add track to album db
 
 DELETE artist
-DELETE album
+****DELETE album
 DELETE all tracks when the album is deleted
 
 EDIT album
@@ -31,17 +31,18 @@ BACK END                    BACK END            END CK END          BACK END    
 BACK END BACK END           BACK END             END K END          BACK END BACK END
 BACK END BACK END           BACK END              BACK END          BACK END BACK END
 
-dropdown when add an artist in album
 Add track
 ****Add artist
 Delete artist
 ****Delete album
 Delete track?
 
+Add track
+Delete artist
+
+
 overflow for album 3 div
 
 http://localhost:63343/album-detail.css/FrontEnd/pages/artist.html?artistId=null if null bomba
-
-
 
 style the small popup when i delete album
