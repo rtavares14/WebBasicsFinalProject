@@ -9,7 +9,7 @@ export const createAlbumsTable = `
                                           description TEXT NULL,
                                           albumCover TEXT,
                                           artist_id INTEGER,
-                                          FOREIGN KEY (artist_id) REFERENCES artists(id) 
+                                          FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE
         );`
 
 export const createArtistTable = `

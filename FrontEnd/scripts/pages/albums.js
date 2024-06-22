@@ -12,6 +12,7 @@ async function fetchAlbumData(albumId) {
         return data;
     } else {
         console.error(`Failed to fetch album data: ${response.status}`);
+        window.location.assign("index.html");
         return null;
     }
 }
@@ -24,11 +25,9 @@ async function deleteAlbum(albumId) {
         });
 
         if (response.status === 200) {
-            alert('Album deleted successfully.');
             window.location.assign("index.html");
         } else {
             console.error(`Failed to delete album: ${response.status}`);
-            alert('Failed to delete album.');
         }
     } catch (e) {
         console.error('Error:', e);
@@ -40,9 +39,7 @@ async function deleteAlbum(albumId) {
 function handleDeleteAlbumButtonClick() {
     const albumId = getAlbumIdFromUrl();
     if (albumId) {
-        if (confirm('Are you sure you want to delete this album?')) {
             deleteAlbum(albumId);
-        }
     } else {
         console.error('Album ID not found in URL');
     }
@@ -121,24 +118,14 @@ async function sendTrackData() {
 
     console.log("Track data from form: ", trackFromForm);
 
-    try {
-        // Implement your fetch request to send track data to the backend
-        // For demo purposes, we're just logging the data to the console
-        console.log('Sending track data to the backend...');
-    } catch (error) {
-        console.error('Error sending track data:', error);
-    }
 }
 
-// Add event listener to track form submit button
 document.addEventListener('DOMContentLoaded', () => {
     const trackForm = document.getElementById('trackForm');
     if (trackForm) {
         trackForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             await sendTrackData();
-            // Optionally close the popup or redirect after submission
-            // Example: document.getElementById('trackPopup').style.display = 'none';
         });
     }
 });
@@ -191,7 +178,6 @@ function handleAddTrackButtonClick() {
     }
 }
 
-// Add event listener to the add track button
 document.addEventListener('DOMContentLoaded', () => {
     const addTrackBtn = document.querySelector('.album-action-button:nth-child(3)');
     if (addTrackBtn) {

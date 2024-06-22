@@ -2,9 +2,9 @@
 
 ****POST/add album to db
 ****POST/add artist to bd
-POST/add track to album db
+****POST/add track to album db
 
-DELETE artist
+****DELETE artist
 ****DELETE album
 DELETE all tracks when the album is deleted
 
@@ -31,18 +31,28 @@ BACK END                    BACK END            END CK END          BACK END    
 BACK END BACK END           BACK END             END K END          BACK END BACK END
 BACK END BACK END           BACK END              BACK END          BACK END BACK END
 
-Add track
-****Add artist
-Delete artist
-****Delete album
+
+****Delete artist
+Add album to artist
+
+Edit album
+Edit artist
+
+
+Fix front end
+Fix back end
+
+Documentation
+Search functionally
+
 Delete track?
 
-Add track
-Delete artist
 
 
-overflow for album 3 div
-
-http://localhost:63343/album-detail.css/FrontEnd/pages/artist.html?artistId=null if null bomba
-
-style the small popup when i delete album
+****Delete album
+****Add track
+****Add artist
+****Add track
+****overflow for album 3 div
+****http://localhost:63343/album-detail.css/FrontEnd/pages/artist.html?artistId=null if null bomba
+****style the small popup when i delete album

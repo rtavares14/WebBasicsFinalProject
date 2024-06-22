@@ -1,5 +1,5 @@
 // Function to get the album ID from the URL
-function getArtistNameFromUrl() {
+function getArtistIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('artistId');
 }
@@ -12,12 +12,43 @@ async function fetchArtistData(artistId) {
         return data;
     } else {
         console.error(`Failed to fetch artist data: ${response.status}`);
+        window.location.assign("index.html");
         return null;
     }
 }
 
+// Function to send a DELETE request to delete an artist
+async function deleteArtist(artistId) {
+    try {
+        const response = await fetch(`http://localhost:3000/artists/${artistId}`, {
+            method: 'DELETE'
+        });
+
+        if (response.status === 200) {
+            alert('Artist deleted successfully.');
+            window.location.assign("index.html");
+        } else {
+            console.error(`Failed to delete artist: ${response.status}`);
+            alert('Failed to delete artist.');
+        }
+    } catch (e) {
+        console.error('Error:', e);
+        alert('An error occurred while deleting the artist.');
+    }
+}
+
+// Function to handle the delete button click
+function handleDeleteArtistButtonClick() {
+    const artistId = getArtistIdFromUrl();
+    if (artistId) {
+        deleteArtist(artistId);
+    } else {
+        console.error('Artist ID not found in URL');
+    }
+}
+
 async function pageLoad() {
-    const artistId = getArtistNameFromUrl();
+    const artistId = getArtistIdFromUrl();
 
     const artistData = await fetchArtistData(artistId);
     if (artistData) {
@@ -60,5 +91,9 @@ async function pageLoad() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const deleteButton = document.querySelector('.artist-action-button:nth-child(1)');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', handleDeleteArtistButtonClick);
+    }
     pageLoad();
 });

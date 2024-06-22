@@ -5,12 +5,10 @@ import {db} from "../database/database.js";
 
 export function getAlbumById(req, res) {
     const albumId = req.params.albumId;
-    console.log('Requested album ID:', albumId);
 
     try {
         const album = db.prepare(queries.getAlbumById).get(albumId);
         if (album) {
-            console.log('Retrieved album:', album);
             const tracks = db.prepare(queries.getTracksFromAlbum).all(albumId);
 
             const albumWithTracks = {

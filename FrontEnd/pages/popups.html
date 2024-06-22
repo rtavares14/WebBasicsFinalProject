@@ -99,3 +99,34 @@
         </form>
     </div>
 </div>
+
+<!-- Popup for adding new album inside the artist -->
+<div id="albumPopup2" class="popup">
+    <div class="popup-content">
+        <h2>Add new Album to the vault</h2>
+        <form id="albumForm2">
+            <label for="albumName">Album name:</label>
+            <input type="text" id="albumName" name="albumName" required>
+
+            <label for="artistName">Artist name:</label>
+            <input type="text" id="artistName" name="artistName" required>
+
+            <label for="numberOfTracks">Number of tracks:</label>
+            <input type="number" id="numberOfTracks" name="numberOfTracks" min="1" required>
+
+            <label for="genre">Musical genre:</label>
+            <input type="text" id="genre" name="genre" required>
+
+            <label for="description">Album description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="albumCover">Upload Album cover (URL):</label>
+            <textarea id="albumCover" name="albumCover" required></textarea>
+
+            <div class="form-buttons">
+                <button type="submit">Save album</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
