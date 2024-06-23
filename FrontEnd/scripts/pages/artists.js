@@ -1,3 +1,4 @@
+const artist_id = getArtistIdFromUrl();
 
 // Function to get the album ID from the URL
 function getArtistIdFromUrl() {
@@ -255,4 +256,14 @@ async function sendAlbumData(artistId) {
     } catch (e) {
         console.log(e);
     }
+}
+
+async function getArtistData(artistId){
+    const response = await fetch(`http://localhost:3000/artists/${artistId}`);
+
+    if (!response.ok) {
+        throw new Error(`Error occured when fetching artists: ${response.status}`);
+    }
+
+    return await response.json();
 }

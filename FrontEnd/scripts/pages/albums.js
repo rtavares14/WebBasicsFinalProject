@@ -26,7 +26,7 @@ async function deleteAlbum(albumId) {
         });
 
         if (response.status === 200) {
-            window.location.assign("index.html");
+            window.location.assign(`../pages/album.html?albumId=${albumId}`);
         } else {
             console.error(`Failed to delete album: ${response.status}`);
         }
