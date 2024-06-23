@@ -1,3 +1,4 @@
+
 // Function to get the album ID from the URL
 function getArtistIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -71,7 +72,11 @@ async function pageLoad() {
             artistData.albums.forEach((album, index) => {
                 document.querySelector('.artist-discography-title').textContent = `Albums list:`;
                 console.log(album)
+
                 const trackEl = document.createElement('div');
+                trackEl.className = 'album-title';
+                trackEl.setAttribute('data-album-id', album.id);
+
                 if(album.albumRate > 0){
                     trackEl.textContent = `Album nr: ${index+1} -- name: ${album.albumName} (tracks: ${album.numberOfTracks}) -- rate ${album.albumRate}/10`;
                 }
@@ -79,12 +84,23 @@ async function pageLoad() {
                     trackEl.textContent = `Album nr: ${index+1} -- name: ${album.albumName} (tracks: ${album.numberOfTracks}) -- rate 0/10`;
                 }
 
+                const deleteAlbumBtn = document.createElement("div")
+                deleteAlbumBtn.className = 'deleteAlbumBtn';
+                deleteAlbumBtn.textContent = `delete`;
+                trackEl.appendChild(deleteAlbumBtn);
+
                 artistListEl.appendChild(trackEl);
             });
         } else {
-            document.querySelector('.artist-discography-title').textContent = `Track list:`;
-            document.querySelector('.artist-discography-text').textContent = `No tracks at the moment`;
+            document.querySelector('.artist-discography-title').textContent = `Album list:`;
+            document.querySelector('.artist-discography-text').textContent = `No albums at the moment`;
         }
+
+        const deleteButton = document.querySelector(".artist-action-button:nth-child(3)");
+        deleteButton.addEventListener('click', toggleDeleteButtonsVisibility);
+
+        const editButton = document.querySelector(".artist-action-button:nth-child(2)");
+        editButton.addEventListener("click", handleEditArtistButtonClick)
     } else {
         console.error('No artist data found');
     }
@@ -95,5 +111,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (deleteButton) {
         deleteButton.addEventListener('click', handleDeleteArtistButtonClick);
     }
+
     pageLoad();
 });
+
+function toggleDeleteButtonsVisibility(){
+    const deleteButtons = document.querySelectorAll(".deleteAlbumBtn")
+    deleteButtons.forEach(deleteButton => {
+        deleteButton.classList.toggle('active');
+        deleteButton.addEventListener("click", async () => {
+            const albumId = deleteButton.parentElement.getAttribute('data-album-id');
+            await deleteAlbum(albumId)
+        })
+    })
+}
+
+async function deleteAlbum(albumId) {
+    const response = await fetch(`http://localhost:3000/albums/${albumId}`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error(`error: ${response.status}`);
+    }
+
+    let currentArtistId = getArtistIdFromUrl();
+    window.location.assign(`../pages/artist.html?artistId=${currentArtistId}`);
+}
+
+function handleEditArtistButtonClick(){
+    // const form = document.getElementById('artistPopup2');
+    // form.classList.add('active');
+}

@@ -132,7 +132,9 @@ body {
     background-color: #3c6b6b;
 }
 
-
+.popup.active {
+    display: flex;
+}
 
 
 
