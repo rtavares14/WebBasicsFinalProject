@@ -25,3 +25,19 @@ export function addTrackToAlbum(req, res) {
     }
 }
 
+export function deleteTrack(req, res) {
+    const trackId = req.params.id;
+
+    try {
+        db.prepare(queries.deleteTrack).run(trackId)
+
+        // Send success response
+        res.status(200).json({ message: "Track deleted successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to delete track." });
+    }
+}

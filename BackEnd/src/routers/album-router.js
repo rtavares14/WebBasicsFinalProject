@@ -14,4 +14,6 @@ albumRouter.post("/",albumController.addAlbum);
 albumRouter.delete("/:albumId",albumController.deleteAlbumById);
 
 
+albumRouter.patch("/:albumId",albumController.updateAlbum);
+
 export default albumRouter;

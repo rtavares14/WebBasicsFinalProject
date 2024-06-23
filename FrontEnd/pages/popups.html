@@ -37,7 +37,7 @@
             <textarea id="albumCover" name="albumCover" required></textarea>
 
             <div class="form-buttons">
-                <button type="submit">Save album</button>
+                <button type="submit">Add album</button>
                 <button type="button" id="cancelBtn">Cancel</button>
             </div>
         </form>
@@ -56,7 +56,7 @@
             <input type="text" id="firstPlaceHearIt" name="firstPlaceHearIt" required>
 
             <label for="artistRate">Artist rate (out of 10):</label>
-            <input type="number" id="artistRate" name="artistRate" min="1" max="10">
+            <input type="number" id="artistRate" name="artistRate" min="1" max="10" step="0.1">
 
             <label for="sawItLive">Already saw them live?</label>
             <input type="text" id="sawItLive" name="sawItLive">
@@ -68,7 +68,7 @@
             <input type="text" id="artistPhoto" name="artistPhoto" required>
 
             <div class="form-buttons">
-                <button type="submit">Save artist</button>
+                <button type="submit">Add artist</button>
                 <button type="button" id="cancelArtistBtn">Cancel</button>
             </div>
         </form>
@@ -87,14 +87,14 @@
             <input type="text" id="trackDuration" name="trackDuration" required>
 
             <label for="trackRate">Track rate (out of 10):</label>
-            <input type="number" id="trackRate" name="trackRate" min="0" max="10">
+            <input type="number" id="trackRate" name="trackRate" min="0" max="10" step="0.1">
 
             <label for="trackNumber">Track number:</label>
             <input type="number" id="trackNumber" name="trackNumber" min="1">
 
             <div class="form-buttons">
                 <button type="submit">Save track</button>
-                <button type="button" id="cancelTrackBtn">Cancel</button>
+            <button type="button" id="cancelTrackBtn">Cancel</button>
             </div>
         </form>
     </div>
@@ -103,16 +103,13 @@
 <!-- Popup for adding new album inside the artist -->
 <div id="albumPopup2" class="popup">
     <div class="popup-content">
-        <h2>Add new Album to the vault</h2>
+        <h2><span id="album-popup-title">Add new</span> Artist</h2>
         <form id="albumForm2">
             <label for="albumName">Album name:</label>
             <input type="text" id="albumName" name="albumName" required>
 
-            <label for="artistName">Artist name:</label>
-            <input type="text" id="artistName" name="artistName" required>
-
-            <label for="numberOfTracks">Number of tracks:</label>
-            <input type="number" id="numberOfTracks" name="numberOfTracks" min="1" required>
+            <label for="albumRate">Album rate (out of 10):</label>
+            <input type="number" id="albumRate" name="albumRate" min="0" max="10" step="0.1">
 
             <label for="genre">Musical genre:</label>
             <input type="text" id="genre" name="genre" required>
@@ -124,8 +121,38 @@
             <textarea id="albumCover" name="albumCover" required></textarea>
 
             <div class="form-buttons">
-                <button type="submit">Save album</button>
-                <button type="button" id="cancelBtn">Cancel</button>
+                <button type="submit">Update album</button>
+                <button type="button" id="cancelAlbumBtn2">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="artistPopup2" class="popup">
+    <div class="popup-content">
+        <h2><span id="artist-popup-title">Add new</span> Artist</h2>
+        <form id="artistForm2">
+            <label for="artistName">Name of the artist:</label>
+            <input type="text" id="artistName" name="artistName" required>
+
+            <label for="firstPlaceHearIt">Place where I first heard them:</label>
+            <input type="text" id="firstPlaceHearIt" name="firstPlaceHearIt" required>
+
+            <label for="artistRate">Artist rate (out of 10):</label>
+            <input type="number" id="artistRate" name="artistRate" min="1" max="10" step="0.1">
+
+            <label for="sawItLive">Already saw them live?</label>
+            <input type="text" id="sawItLive" name="sawItLive">
+
+            <label for="artistDescription">Artist description:</label>
+            <textarea id="artistDescription" name="artistDescription" ></textarea>
+
+            <label for="artistPhoto">Artist photo (URL):</label>
+            <input type="text" id="artistPhoto" name="artistPhoto" required>
+
+            <div class="form-buttons">
+                <button type="submit">Update artist</button>
+                <button type="button" id="cancelArtistBtn2">Cancel</button>
             </div>
         </form>
     </div>

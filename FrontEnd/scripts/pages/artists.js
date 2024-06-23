@@ -13,7 +13,7 @@ async function fetchArtistData(artistId) {
         return data;
     } else {
         console.error(`Failed to fetch artist data: ${response.status}`);
-        window.location.assign("index.html");
+        window.location.assign('index.html');
         return null;
     }
 }
@@ -112,6 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteButton.addEventListener('click', handleDeleteArtistButtonClick);
     }
 
+    const editButton = document.querySelector('.artist-action-button:nth-child(2)');
+    if (editButton) {
+        editButton.addEventListener('click', handleEditArtistButtonClick);
+    }
+
+    const addAlbumButton = document.querySelector('.artist-action-button:nth-child(4)');
+    if (addAlbumButton) {
+        addAlbumButton.addEventListener('click', handleAddAlbumButtonClick);
+    }
+
     pageLoad();
 });
 
@@ -139,7 +149,110 @@ async function deleteAlbum(albumId) {
     window.location.assign(`../pages/artist.html?artistId=${currentArtistId}`);
 }
 
-function handleEditArtistButtonClick(){
-    // const form = document.getElementById('artistPopup2');
-    // form.classList.add('active');
+async function handleEditArtistButtonClick(){
+    const artistId = getArtistIdFromUrl();
+    const artistPopup2 = document.getElementById('artistPopup2');
+
+    if (artistId && artistPopup2) {
+        artistPopup2.style.display = 'block';
+        console.log("opened popup")
+
+        //change title to edit
+        //prefill pop up with data
+        const title = document.getElementById("artist-popup-title");
+        title.textContent = 'Edit';
+
+        const form = document.getElementById("artistForm2")
+        await prefillFormWithData(form)
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const updatedArtist = getObjectFromForm(form);
+
+            await updateArtist(updatedArtist);
+            window.location.assign(`../pages/artist.html?artistId=${artist_id}`);
+        })
+    } else {
+        console.error('Artist ID not found in URL or track popup not found');
+    }
+}
+
+async function updateArtist(artist){
+    const response = await fetch(`http://localhost:3000/artists/${artist_id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(artist)
+    });
+
+    if (!response.ok) {
+        throw new Error(`error: ${response.status}`);
+    }
+
+    return response;
+}
+
+async function prefillFormWithData(form) {
+    const artist = await getArtistData(artist_id);
+
+    form.elements.artistName.value = artist.artistName;
+    form.elements.firstPlaceHearIt.value = artist.firstPlaceHearIt;
+    form.elements.artistRate.value = artist.artistRate;
+    form.elements.sawItLive.value = artist.sawItLive;
+    form.elements.artistDescription.value = artist.artistDescription;
+    form.elements.artistPhoto.value = artist.artistPhoto;
+}
+
+function handleAddAlbumButtonClick() {
+    const artistId = getArtistIdFromUrl();
+    const albumPopup2 = document.getElementById('albumPopup2');
+
+    if (artistId && albumPopup2) {
+        albumPopup2.style.display = 'block';
+
+        const title = document.getElementById("artist-popup-title");
+        title.textContent = 'Add new';
+
+        // Add event listener to track form submit button inside the popup
+        const trackForm = document.getElementById('albumPopup2');
+        albumPopup2.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            await sendAlbumData(artistId);
+            albumPopup2.style.display = 'none'; // Close the popup after submission
+        });
+    } else {
+        console.error('Artist ID not found in URL or track popup not found');
+    }
+}
+
+function getObjectFromForm(form) {
+    const formData = new FormData(form);
+    return Object.fromEntries(formData);
+}
+
+async function sendAlbumData(artistId) {
+    const form = document.getElementById('albumForm2');
+    const albumFromForm = getObjectFromForm(form);
+
+    console.log("Obj from form ", albumFromForm);
+    console.log(artistId);
+    try {
+        const response = await fetch(`http://localhost:3000/artists/${artistId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(albumFromForm)
+        });
+
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            console.error('Failed to send album data', response);
+        }
+    } catch (e) {
+        console.log(e);
+    }
 }

@@ -8,7 +8,7 @@ export function addArtist(req, res) {
 
     try {
         // Check if the artist already exists
-        if (isArtistNameExists(artist.artistName)) {
+        if (doesArtistExists(artist.artistName)) {
             return res.status(400).json({ error: "Artist already exists." });
         }
 
@@ -38,7 +38,7 @@ export function addArtist(req, res) {
         console.error(error);
 
         // Send error response
-        res.status(500).json({ error: "Failed to add album." });
+        res.status(500).json({ error: "Failed to add artist." });
     }
 }
 
@@ -86,6 +86,73 @@ export function deleteArtist(req, res) {
     }
 }
 
+export function addAlbumToArtist(req, res) {
+    const artist_id = req.params.id;
+
+    const { albumName, numberOfTracks,albumRate, genre, description, albumCover } = req.body;
+    const album = { albumName, numberOfTracks,albumRate, genre, description, albumCover };
+
+    try {
+        console.log(artist_id)
+
+        const artistName = db.prepare(queries.getArtistNameById).get(artist_id);
+        console.log(artistName.artistName)
+        validateAlbumData(album);
+
+        const newAlbum = db.prepare(queries.insertNewAlbumQuery);
+
+        newAlbum.run(albumName,artistName.artistName,numberOfTracks,genre,description,albumCover,artist_id);
+        res.status(statusCodes.OK).send({ message: "Album added successfully" });
+
+
+    }catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to add album." });
+    }
+}
+
+export function deleteAlbum(req, res) {
+    const albumId = req.params.albumId;
+
+    try {
+        db.prepare(queries.deleteAlbum).run(albumId)
+
+        // Send success response
+        res.status(200).json({ message: "Artist deleted successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to delete artist." });
+    }
+}
+
+export function updateArtist(req, res) {
+    const { artistName, firstPlaceHearIt, artistRate, sawItLive, artistDescription, artistPhoto } = req.body;
+    const artist = { artistName, firstPlaceHearIt, artistRate, sawItLive, artistDescription, artistPhoto };
+    const artistId = req.params.artistId;
+
+    try {
+                validateArtistData(artist)
+
+        const updatedArtist = db.prepare(queries.updateArtist);
+        updatedArtist.run(artistName,firstPlaceHearIt,artistRate,sawItLive,artistDescription,artistPhoto,artistId);
+
+        // Send success response
+        res.status(200).json({ message: "Artist updated successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to updated artist." });
+    }
+}
+
 
 function validateArtistData(artist) {
     if (isStringEmpty(artist.artistName) || isStringEmpty(artist.artistDescription) || isStringEmpty(artist.artistPhoto)) {
@@ -103,11 +170,28 @@ function validateArtistData(artist) {
     }
 }
 
+function validateAlbumData(album) {
+    console.log(album);
+    if (isStringEmpty(album.albumName) || isStringEmpty(album.albumCover)) {
+        throw {
+            status: statusCodes.BAD_REQUEST,
+            message: "Invalid values provided for album"
+        };
+    }
+
+    if (album.numberOfTracks > 10 || album.numberOfTracks < 0) {
+        throw {
+            status: statusCodes.BAD_REQUEST,
+            message: "Artist rate should be more than 0 and less then 10"
+        };
+    }
+}
+
 function isStringEmpty(str) {
     return !str || str.trim().length === 0;
 }
 
-function isArtistNameExists(artistName) {
+function doesArtistExists(artistName) {
     const stmt = db.prepare(queries.getArtistByNameQuery);
     const result = stmt.get(artistName);
     return result !== undefined;

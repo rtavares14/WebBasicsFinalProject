@@ -27,6 +27,11 @@ function renderAlbum(album, albumContainer) {
     const albumEl = document.createElement('div');
     albumEl.classList.add('album-cell');
     albumEl.dataset.albumId = album.id;
+    const rate = 0;
+
+    if(album.albumRate > 0){
+         rate === album.albumRate;
+    }
 
     albumEl.innerHTML = `
         <a href="../pages/album.html?albumId=${album.id}">
@@ -36,7 +41,7 @@ function renderAlbum(album, albumContainer) {
                 <div class="album-info artist-name" style="cursor: pointer;" data-artist-id="${album.artist_id}">${album.artistName}</div>
             </div>
         </a>
-        <div class="album-info album-rating">Rating 0/10</div>
+        <div class="album-info album-rating">Rating ${rate}/10</div>
     `;
 
     const albumNameEl = albumEl.querySelector('.album-name');

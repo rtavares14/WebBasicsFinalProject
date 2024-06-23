@@ -169,3 +169,33 @@ export const deleteAlbum  = `
 export const deleteArtist  = `
     delete from artists where id = ?;
 `;
+
+export const deleteTrack  = `
+    delete from tracks where id = ?;
+`;
+
+export const updateArtist = `
+                                           UPDATE artists
+                                           SET artistName = ?,
+                                           firstPlaceHearIt = ?,
+                                           artistRate = ?,
+                                           sawItLive = ?,
+                                           artistDescription = ?,
+                                           artistPhoto = ?
+                                           WHERE id = ?;
+`;
+
+export const getArtistNameById  = `
+    select artistName from artists WHERE id=?;
+`;
+
+export const updateAlbum = `
+                                           UPDATE albums
+                                           SET albumName = ?,
+                                            genre = ?,
+                                            albumRate = ?,
+                                            description = ?,
+                                            albumCover = ?    
+                                           WHERE id = ?;
+`;
+

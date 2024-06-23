@@ -19,10 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const mainPopup = document.getElementById('popup');
             const artistPopup = document.getElementById('artistPopup');
-            const trackPopup = document.getElementById('trackPopup'); // Add this line
+            const trackPopup = document.getElementById('trackPopup');
+            const editArtistPopup = document.getElementById('artistPopup2');
+            const editalbumPopup = document.getElementById('albumPopup2');
             const cancelBtn = document.getElementById('cancelBtn');
             const cancelArtistBtn = document.getElementById('cancelArtistBtn');
-            const cancelTrackBtn = document.getElementById('cancelTrackBtn'); // Add this line
+            const cancelTrackBtn = document.getElementById('cancelTrackBtn');
+            const cancelAlbumBtn2 = document.getElementById('cancelAlbumBtn2');
+            const cancelArtistBtn2 = document.getElementById('cancelArtistBtn2');
 
             openAddAlbumPopup.addEventListener('click', () => {
                 initialPopup.style.display = 'none';
@@ -51,6 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 trackPopup.style.display = 'none';
             });
 
+            cancelArtistBtn2.addEventListener('click', () => {
+                editArtistPopup.style.display = 'none';
+            });
+
+            cancelAlbumBtn2.addEventListener('click', () => {
+                editalbumPopup.style.display = 'none';
+            });
+
             window.addEventListener('click', (event) => {
                 if (event.target === initialPopup) {
                     initialPopup.style.display = 'none';
@@ -68,7 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const albumForm = document.getElementById('albumForm');
             const artistForm = document.getElementById('artistForm');
-            const trackForm = document.getElementById('trackForm'); // Add this line
+            const trackForm = document.getElementById('trackForm');
+            const editArtistForm = document.getElementById('artistPopup2');
 
             albumForm.addEventListener('submit', (event) => {
                 event.preventDefault();

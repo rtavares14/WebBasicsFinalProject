@@ -6,10 +6,10 @@
 
 ****DELETE artist
 ****DELETE album
-DELETE all tracks when the album is deleted
+****DELETE all tracks when the album is deleted
 
-EDIT album
-EDIT artist
+****EDIT album
+****EDIT artist
 
 ***PUT/get album info
 ***PUT/get artist info
@@ -33,10 +33,13 @@ BACK END BACK END           BACK END              BACK END          BACK END BAC
 
 
 ****Delete artist
-Add album to artist
+****Edit album track
+****Add album to artist
 
-Edit album
-Edit artist
+****Edit album
+****Edit artist
+
+Page with artists ?
 
 
 Fix front end
@@ -45,7 +48,7 @@ Fix back end
 Documentation
 Search functionally
 
-Delete track?
+****Delete track?
 
 
 

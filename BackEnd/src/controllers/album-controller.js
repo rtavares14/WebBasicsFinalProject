@@ -87,7 +87,27 @@ export function deleteAlbumById(req, res) {
     }
 }
 
+export function updateAlbum(req, res) {
+    const { albumName,genre,albumRate,description,albumCover} = req.body;
+    const album = { albumName,genre,albumRate,description,albumCover};
+    const albumId = req.params.albumId;
 
+    try {
+        validateEditedAlbumData(album)
+
+        const updatedAlbum = db.prepare(queries.updateAlbum);
+        updatedAlbum.run(albumName,genre,albumRate,description,albumCover,albumId);
+
+        // Send success response
+        res.status(200).json({ message: "album updated successfully." });
+    } catch (error) {
+        // Log the error
+        console.error(error);
+
+        // Send error response
+        res.status(500).json({ error: "Failed to updated album." });
+    }
+}
 
 
 
@@ -109,6 +129,14 @@ function validateAlbumData(album) {
         throw {
             status: statusCodes.BAD_REQUEST,
             message: "Number of tracks can't be less than 1"
+        };
+    }
+}
+function validateEditedAlbumData(album) {
+    if (isStringEmpty(album.albumName) || isStringEmpty(album.albumCover)) {
+        throw {
+            status: statusCodes.BAD_REQUEST,
+            message: "Invalid values provided for album"
         };
     }
 }
