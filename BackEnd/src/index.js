@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}))
 
 // Use the albumRouter to handle all the albums rated routes
-app.use('/albums', albumRouter);
+    app.use('/albums', albumRouter);
 
 // Use the trackRouter to handle all the tracks rated routes
 app.use('/tracks', trackRouter);

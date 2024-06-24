@@ -48,7 +48,6 @@ export function getArtistById(req, res) {
     try {
         const artist = db.prepare(queries.getArtistByIdQuery).get(artistId);
         if (artist) {
-            console.log('Retrieved Artist:', artist);
 
             const albums = db.prepare(queries.getAlbumsFromArtist).all(artistId);
 
