@@ -44,7 +44,6 @@ export function addArtist(req, res) {
 
 export function getArtistById(req, res) {
     const artistId = req.params.artistId;
-    console.log('Requested artist ID:', artistId);
 
     try {
         const artist = db.prepare(queries.getArtistByIdQuery).get(artistId);

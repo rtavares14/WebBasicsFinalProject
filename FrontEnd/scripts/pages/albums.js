@@ -92,7 +92,6 @@ async function pageLoad() {
         albumCoverEl.src = albumData.albumCover;
         albumCoverEl.alt = albumData.albumName;
 
-        // Populate track list
         const trackListEl = document.querySelector('.album-tracks-text');
         trackListEl.innerHTML = '';
         if (Object.keys(albumData.tracks).length > 0) {
@@ -105,7 +104,7 @@ async function pageLoad() {
                 trackEl.innerHTML = `Track nr: ${track.trackNumber} -- name: ${track.trackName} -- duration: ${track.trackDuration}m -- rate ${track.trackRate}/10 
                                     <div class="deleteAlbumBtn" data-track-id="${track.id}">Delete</div>`;
                 trackListEl.appendChild(trackEl);
-            });// Add event listeners to delete buttons
+            });
             const deleteTrackButtons = document.querySelectorAll('.delete-track-button');
             deleteTrackButtons.forEach(button => {
                 button.addEventListener('click', async (event) => {
@@ -141,7 +140,6 @@ async function sendTrackData(albumId) {
 
         if (response.ok) {
             console.log('Track added successfully');
-            // Reload the page after adding the track
             window.location.reload();
         } else {
             console.error('Failed to add track:', response.status);
@@ -158,12 +156,11 @@ function handleAddTrackButtonClick() {
     if (albumId && trackPopup) {
         trackPopup.style.display = 'block';
 
-        // Add event listener to track form submit button inside the popup
         const trackForm = document.getElementById('trackForm');
         trackForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             await sendTrackData(albumId);
-            trackPopup.style.display = 'none'; // Close the popup after submission
+            trackPopup.style.display = 'none';
         });
     } else {
         console.error('Album ID not found in URL or track popup not found');

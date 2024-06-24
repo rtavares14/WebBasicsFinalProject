@@ -17,14 +17,13 @@ async function getAlbums() {
 
 async function pageLoad() {
     const albums = await getAlbums();
-    console.log("Albums:", albums); // Log the albums to check if it's an array
     if (!Array.isArray(albums)) {
         console.error("Albums is not an array");
         return;
     }
 
     albumContainer.innerHTML = '';
-    albumRatings.length = 0; // Clear existing ratings
+    albumRatings.length = 0;
 
     for (const album of albums) {
         renderAlbum(album, albumContainer);
@@ -71,7 +70,7 @@ function renderAlbum(album, albumContainer) {
 
 function calculateAverageRating(ratings) {
     if (ratings.length === 0) {
-        return 0; // Prevent division by zero
+        return 0;
     }
     const sum = ratings.reduce((acc, rating) => acc + rating, 0);
     return sum / ratings.length;

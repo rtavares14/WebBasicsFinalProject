@@ -60,6 +60,11 @@ export const insertNewAlbumQuery = `
     VALUES (?, ?, ?, ?, ?, ?, ?)
 `;
 
+export const insertNewAlbumQueryWithRating = `
+    INSERT INTO albums (albumName, artistName, albumRate ,numberOfTracks, genre, description, albumCover, artist_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+`;
+
 export const getAlbumsWithRatingQuery = `
     SELECT
         id,

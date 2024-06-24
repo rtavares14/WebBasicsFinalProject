@@ -10,7 +10,6 @@ async function getAlbums() {
 
 async function pageLoad() {
     const albums = await getAlbums();
-    console.log("Albums:", albums); // Log the albums to check if it's an array
     if (!Array.isArray(albums)) {
         console.error("Albums is not an array");
         return;
@@ -27,11 +26,7 @@ function renderAlbum(album, albumContainer) {
     const albumEl = document.createElement('div');
     albumEl.classList.add('album-cell');
     albumEl.dataset.albumId = album.id;
-    const rate = 0;
-
-    if(album.albumRate > 0){
-         rate === album.albumRate;
-    }
+    const rate = album.albumRate > 0 ? album.albumRate : 0;
 
     albumEl.innerHTML = `
         <a href="../pages/album.html?albumId=${album.id}">

@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Event listener for opening the initial popup
     const openPopupBtn = document.getElementById('addInfoBtn');
     openPopupBtn.addEventListener('click', () => {
         document.getElementById('initialPopup').style.display = 'block';
     });
 
-    // Fetch and load the popups content
     fetch('popups.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('popupsContainer').innerHTML = data;
 
-            // Now add event listeners to elements within popupsContainer
             const initialPopup = document.getElementById('initialPopup');
             const openAddAlbumPopup = document.getElementById('openAddAlbumPopup');
             const openOtherPopup = document.getElementById('openOtherPopup');
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 artistPopup.style.display = 'none';
             });
 
-            // Handle cancel button for track popup
             cancelTrackBtn.addEventListener('click', () => {
                 trackPopup.style.display = 'none';
             });
@@ -73,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (event.target === artistPopup) {
                     artistPopup.style.display = 'none';
                 }
-                if (event.target === trackPopup) { // Add this condition
+                if (event.target === trackPopup) {
                     trackPopup.style.display = 'none';
                 }
             });
@@ -93,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sendArtistData();
             });
 
-            trackForm.addEventListener('submit', (event) => { // Add this block
+            trackForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 sendTrackData();
             });
@@ -108,9 +104,7 @@ function getObjectFromForm(form) {
 
 async function sendAlbumData() {
     const form = document.getElementById('albumForm');
-    const albumFromForm = getObjectFromForm(form)
-
-    console.log("Obj from form ", albumFromForm)
+    const albumFromForm = getObjectFromForm(form);
 
     try {
         const response = await fetch(`http://localhost:3000/albums`, {
@@ -121,17 +115,15 @@ async function sendAlbumData() {
             body: JSON.stringify(albumFromForm)
         });
 
-        window.location.assign("to_listening.html")
-    } catch (e){
-        console.log(e)
+        window.location.assign("to_listening.html");
+    } catch (e) {
+        console.log(e);
     }
 }
 
 async function sendArtistData() {
     const form = document.getElementById('artistForm');
-    const artistFromForm = getObjectFromForm(form)
-
-    console.log("Obj from form ", artistFromForm)
+    const artistFromForm = getObjectFromForm(form);
 
     try {
         const response = await fetch(`http://localhost:3000/artists`, {
@@ -144,14 +136,10 @@ async function sendArtistData() {
 
         if (response.status === 400) {
             const result = await response.json();
-            console.log(result.error); // Log the error message
-
-            // Close the popup
+            console.log(result.error);
             closePopup();
         } else if (response.ok) {
-            // Successfully added the artist
             console.log('Artist added successfully');
-            // Optionally redirect or update the UI
             window.location.assign("../pages/to_listening.html");
         }
     } catch (e) {
@@ -159,7 +147,6 @@ async function sendArtistData() {
     }
 }
 
-// Function to close the popup
 function closePopup() {
     const popup = document.getElementById('artistPopup');
     if (popup) {

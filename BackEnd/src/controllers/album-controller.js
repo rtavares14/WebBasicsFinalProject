@@ -25,7 +25,7 @@ export function getAlbumById(req, res) {
         res.status(statusCodes.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });
     }
 }
-export function getAllAlbums(req, res) {
+export function getAllAlbumsWithRating(req, res) {
     try {
         const albums = db.prepare(queries.getAlbumsWithRatingQuery).all();
         res.json(albums);
