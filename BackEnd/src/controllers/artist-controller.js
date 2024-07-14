@@ -1,6 +1,6 @@
 import statusCodes from "http-status-codes"
-import * as queries from "../database/databasequerys.js";
-import {db} from "../database/database.js";
+import * as dbHelper from "../database/database-helper.js"
+
 
 export function addArtist(req, res) {
     const { artistName, firstPlaceHearIt, artistRate, sawItLive, artistDescription, artistPhoto } = req.body;
@@ -16,19 +16,18 @@ export function addArtist(req, res) {
         validateArtistData(artist);
 
         // Insert the new artist
-        const insertArtist = db.prepare(queries.insertArtistQuery);
-        insertArtist.run(artist.artistName, artist.firstPlaceHearIt, artist.artistRate, artist.sawItLive, artist.artistDescription, artist.artistPhoto);
+        dbHelper.insertNewArtist(artist)
 
         // Get the new artist's ID
         const artist_id = getArtistIdByName(artist.artistName);
 
         // Get all albums by the artist name
-        const albums = db.prepare(queries.getAlbumsFromArtistByName).all(artist.artistName);
+        const albums = dbHelper.getAllAlbumsByArtistName(artist.artistName)
 
-        // Update each album to connect to the new artist ID
-        const updateAlbum = db.prepare(queries.updateAlbumByAddingArtistID);
+
         for (const album of albums) {
-            updateAlbum.run(artist_id, album.id);
+            // Update each album to connect to the new artist ID
+            dbHelper.updateAlbum(artist_id, album.id)
         }
 
 
@@ -46,10 +45,11 @@ export function getArtistById(req, res) {
     const artistId = req.params.artistId;
 
     try {
-        const artist = db.prepare(queries.getArtistByIdQuery).get(artistId);
+        const artist = dbHelper.getArtistById(artistId)
+
         if (artist) {
 
-            const albums = db.prepare(queries.getAlbumsFromArtist).all(artistId);
+            const albums = dbHelper.getAllAlbumsByArtistId(artistId)
 
             const ArtistWithAlbums = {
                 ...artist,
@@ -71,7 +71,7 @@ export function deleteArtist(req, res) {
     console.log('Requested artist ID:', artistId);
 
     try {
-        db.prepare(queries.deleteArtist).run(artistId)
+        dbHelper.deleteArtist(artistId)
 
         // Send success response
         res.status(200).json({ message: "Artist deleted successfully." });
@@ -85,21 +85,21 @@ export function deleteArtist(req, res) {
 }
 
 export function addAlbumToArtist(req, res) {
-    const artist_id = req.params.id;
+    const artistId = req.params.id;
 
     const { albumName, numberOfTracks,albumRate, genre, description, albumCover } = req.body;
     const album = { albumName, numberOfTracks,albumRate, genre, description, albumCover };
 
     try {
-        console.log(artist_id)
+        console.log(artistId)
 
-        const artistName = db.prepare(queries.getArtistNameById).get(artist_id);
+        const artistName = dbHelper.getArtistNameById(artistId)
         console.log(artistName.artistName)
+
         validateAlbumData(album);
 
-        const newAlbum = db.prepare(queries.insertNewAlbumQuery);
+        dbHelper.insertNewAlbum(albumName,artistName.artistName,numberOfTracks,genre,description,albumCover,artist_id)
 
-        newAlbum.run(albumName,artistName.artistName,numberOfTracks,genre,description,albumCover,artist_id);
         res.status(statusCodes.OK).send({ message: "Album added successfully" });
 
 
@@ -116,7 +116,7 @@ export function deleteAlbum(req, res) {
     const albumId = req.params.albumId;
 
     try {
-        db.prepare(queries.deleteAlbum).run(albumId)
+        dbHelper.deleteAlbum(albumId)
 
         // Send success response
         res.status(200).json({ message: "Artist deleted successfully." });
@@ -135,10 +135,9 @@ export function updateArtist(req, res) {
     const artistId = req.params.artistId;
 
     try {
-                validateArtistData(artist)
+        validateArtistData(artist)
 
-        const updatedArtist = db.prepare(queries.updateArtist);
-        updatedArtist.run(artistName,firstPlaceHearIt,artistRate,sawItLive,artistDescription,artistPhoto,artistId);
+        dbHelper.updateArtist(artistName,firstPlaceHearIt,artistRate,sawItLive,artistDescription,artistPhoto,artistId)
 
         // Send success response
         res.status(200).json({ message: "Artist updated successfully." });
@@ -190,13 +189,11 @@ function isStringEmpty(str) {
 }
 
 function doesArtistExists(artistName) {
-    const stmt = db.prepare(queries.getArtistByNameQuery);
-    const result = stmt.get(artistName);
+    const result = dbHelper.getArtistByName(artistName);
     return result !== undefined;
 }
 
 function getArtistIdByName(artistName) {
-    const stmt = db.prepare(queries.getArtistByNameQuery);
-    const result = stmt.get(artistName);
+    const result = dbHelper.getArtistByName(artistName);
     return result ? result.id : null;
 }

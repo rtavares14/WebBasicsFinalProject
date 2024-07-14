@@ -1,15 +1,14 @@
 import statusCodes from "http-status-codes"
-import * as queries from "../database/databasequerys.js";
-import {db} from "../database/database.js";
+import * as dbHelper from "../database/database-helper.js"
 
 
 export function getAlbumById(req, res) {
     const albumId = req.params.albumId;
 
     try {
-        const album = db.prepare(queries.getAlbumById).get(albumId);
+        const album = dbHelper.getAlbumById(albumId);
         if (album) {
-            const tracks = db.prepare(queries.getTracksFromAlbum).all(albumId);
+            const tracks = dbHelper.getTracksFromAlbum(albumId);
 
             const albumWithTracks = {
                 ...album,
@@ -27,7 +26,7 @@ export function getAlbumById(req, res) {
 }
 export function getAllAlbumsWithRating(req, res) {
     try {
-        const albums = db.prepare(queries.getAlbumsWithRatingQuery).all();
+        const albums = dbHelper.getAllAlbumsWithRating();
         res.json(albums);
     } catch (error) {
         console.error("Error retrieving albums:", error);
@@ -36,7 +35,7 @@ export function getAllAlbumsWithRating(req, res) {
 }
 export function getAllAlbumsToListening(req, res) {
     try {
-        const albums = db.prepare(queries.getAlbumsWithoutRatingQuery).all();
+        const albums = dbHelper.getAllAlbumsWithNoRating();
         res.json(albums);
     } catch (error) {
         console.error("Error retrieving albums:", error);
@@ -55,9 +54,8 @@ export function addAlbum(req, res) {
         // Get artistId based on artistName
         const artist_id = getArtistIdByName(album.artistName);
 
-        // Prepare the insert query
-        const insertAlbum = db.prepare(queries.insertNewAlbumQuery);
-        insertAlbum.run(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumCover, artist_id);
+        // insert query
+        dbHelper.insertNewAlbum(album.albumName, album.artistName, album.numberOfTracks, album.genre, album.description, album.albumCover, artist_id);
 
         // Send success response
         res.status(200).json({ message: "Album added successfully." });
@@ -74,7 +72,7 @@ export function deleteAlbumById(req, res) {
     const albumId = req.params.albumId;
 
     try {
-        db.prepare(queries.deleteAlbum).run(albumId)
+        dbHelper.deleteAlbum(albumId);
 
         // Send success response
         res.status(200).json({ message: "Album deleted successfully." });
@@ -95,8 +93,7 @@ export function updateAlbum(req, res) {
     try {
         validateEditedAlbumData(album)
 
-        const updatedAlbum = db.prepare(queries.updateAlbum);
-        updatedAlbum.run(albumName,genre,albumRate,description,albumCover,albumId);
+        dbHelper.updateAlbumAllFields(albumName,genre,albumRate,description,albumCover,albumId);
 
         // Send success response
         res.status(200).json({ message: "album updated successfully." });
@@ -109,14 +106,11 @@ export function updateAlbum(req, res) {
     }
 }
 
-
-
-
 function getArtistIdByName(artistName) {
-    const stmt = db.prepare(queries.getArtistIdByNameQuery);
-    const result = stmt.get(artistName);
+    const result = dbHelper.getArtistIdByArtistName(artistName);
     return result ? result.id : null;
 }
+
 function validateAlbumData(album) {
     if (isStringEmpty(album.albumName) || isStringEmpty(album.artistName) || isStringEmpty(album.albumCover)) {
         throw {
@@ -132,6 +126,7 @@ function validateAlbumData(album) {
         };
     }
 }
+
 function validateEditedAlbumData(album) {
     if (isStringEmpty(album.albumName) || isStringEmpty(album.albumCover)) {
         throw {
@@ -140,7 +135,7 @@ function validateEditedAlbumData(album) {
         };
     }
 }
+
 function isStringEmpty(str) {
     return !str || str.trim().length === 0;
 }
-
